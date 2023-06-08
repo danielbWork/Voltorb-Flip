@@ -1,5 +1,5 @@
 <script>
-  let test = "Hello world";
+  let test = "test";
 </script>
 
 <div>
