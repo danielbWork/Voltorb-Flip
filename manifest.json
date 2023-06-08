@@ -3,9 +3,16 @@
 	"name": "Voltorb-Flip",
 	"description": "Allows you to play voltorb flip",
 	"version": "1.0.0",
-	"icons": {},
+	"icons": {
+		"48": "src/icons/voltorb_48x48.png",
+		"96": "src/icons/voltorb_96x96.png"
+	},
 	"permissions": [],
 	"browser_action": {
+		"default_icon": {
+			"48": "src/icons/voltorb_48x48.png",
+			"96": "src/icons/voltorb_96x96.png"
+		},
 		"default_popup": "src/browserAction/index.html",
 		"default_title": "Voltorb-Flip"
 	}

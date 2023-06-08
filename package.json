@@ -1,5 +1,5 @@
 {
-	"name": "Voltorb-Flip",
+	"name": "voltorb-flip",
 	"version": "1.0.0",
 	"description": "Allows you to play voltorb flip",
 	"main": "index.js",
@@ -8,7 +8,7 @@
 		"build": "parcel build manifest.json --target webext-prod"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Daniel Bauer",
 	"license": "ISC",
 	"targets": {
 		"webext-dev": {},
@@ -20,9 +20,9 @@
 		"webextension-polyfill": "^0.10.0"
 	},
 	"devDependencies": {
-		"@parcel/config-webextension": "^2.9.1",
+		"@parcel/config-webextension": "2.8.3",
 		"@types/webextension-polyfill": "^0.10.0",
-		"parcel": "^2.9.1",
+		"parcel": "2.8.3",
 		"parcel-transformer-svelte": "^1.2.3",
 		"svelte": "^3.59.1"
 	}
