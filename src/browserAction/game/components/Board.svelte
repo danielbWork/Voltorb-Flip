@@ -39,14 +39,25 @@
     return board;
   }
 
+  function handleHiddenClick(event) {
+    console.log(event);
+    const id = event.detail.id;
+    board[id.rowIndex][id.colIndex].isHidden = false;
+  }
+
   let board = generateBoard(0);
   console.log(board);
 </script>
 
 <ScoreDisplay />
-{#each board as row}
-  {#each row as square}
-    <Square value={square.value} isHidden={square.isHidden} />
+{#each board as row, rowIndex}
+  {#each row as square, colIndex}
+    <Square
+      id={{ rowIndex, colIndex }}
+      value={square.value}
+      isHidden={square.isHidden}
+      on:hiddenClick={handleHiddenClick}
+    />
   {/each}
 {/each}
 
