@@ -1,9 +1,11 @@
 <script>
+  import Board from "./game/components/Board.svelte";
+
   let test = "test";
 </script>
 
 <div>
-  {test}
+  <Board />
 </div>
 
 <style>
