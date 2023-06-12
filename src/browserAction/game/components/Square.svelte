@@ -28,15 +28,15 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <img on:click={onHiddenClick} alt="hidden" src="/icons/hidden_square.png" />
 {:else if value === -1}
-  <img alt="hidden" src="/icons/shiny_voltorb.png" />
+  <img alt="0" src="/icons/shiny_voltorb.png" />
 {:else if value === 0}
-  <img alt="hidden" src="/icons/voltorb.png" />
+  <img alt="0" src="/icons/voltorb.png" />
 {:else if value === 1}
-  <img alt="hidden" src="/icons/square_1.png" />
+  <img alt="1" src="/icons/square_1.png" />
 {:else if value === 2}
-  <img alt="hidden" src="/icons/square_2.png" />
+  <img alt="2" src="/icons/square_2.png" />
 {:else if value === 3}
-  <img alt="hidden" src="/icons/square_3.png" />
+  <img alt="3" src="/icons/square_3.png" />
 {/if}
 
 <style>
@@ -45,6 +45,5 @@
     height: 50px;
     border: 2px solid #282828;
     outline: 4px solid #d0e8e0;
-    margin: 6px;
   }
 </style>

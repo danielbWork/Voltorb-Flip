@@ -61,12 +61,10 @@ const levelInfo = [
 ];
 
 /**
- * Selects the level info to use ffor the board
+ * Selects the level info to use for the board
  * @param level The level we want to select from
  * @returns One of the optional level value selection to put on the board
  */
 export function getLevelInfo(level: number) {
-  console.log(levelInfo);
-
   return levelInfo[level][Math.floor(Math.random() * 5)];
 }
