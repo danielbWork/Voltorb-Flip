@@ -1,6 +1,9 @@
 import { getLevelInfo } from "./LevelInfo";
 import { BoardSquare, LineSum } from "./types";
 
+/**
+ * Manages the game state and board
+ */
 export class GameManager {
   /**
    * The current level the player is on

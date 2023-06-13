@@ -4,6 +4,8 @@
   import ScoreDisplay from "./ScoreDisplay.svelte";
   import Square from "./Square.svelte";
 
+  const infoColors = ["#e07050", "#40a840", "#e8a038", "#3090f8", "#c060e0"];
+
   const game = new GameManager();
 
   $: board = game.board;
@@ -35,11 +37,12 @@
     <InfoSquare
       sum={rowSums[rowIndex].sum}
       voltorbCount={rowSums[rowIndex].voltorbCount}
+      color={infoColors[rowIndex]}
     />
   {/each}
 
-  {#each colSums as { sum, voltorbCount }}
-    <InfoSquare {sum} {voltorbCount} />
+  {#each colSums as { sum, voltorbCount }, index}
+    <InfoSquare {sum} {voltorbCount} color={infoColors[index]} />
   {/each}
 </div>
 

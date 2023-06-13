@@ -22,21 +22,26 @@
   }
 </script>
 
-<!-- TODO Fix out line to match actual ui -->
+<!-- TODO Fix outline to match actual ui -->
 <!-- TODO maybe choose better images -->
 {#if isHidden}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <img on:click={onHiddenClick} alt="hidden" src="/icons/hidden_square.png" />
+  <img
+    on:click={onHiddenClick}
+    alt="hidden"
+    src="/icons/hidden_square.png"
+    draggable="false"
+  />
 {:else if value === -1}
-  <img alt="0" src="/icons/shiny_voltorb.png" />
+  <img alt="0" src="/icons/shiny_voltorb.png" draggable="false" />
 {:else if value === 0}
-  <img alt="0" src="/icons/voltorb.png" />
+  <img alt="0" src="/icons/voltorb.png" draggable="false" />
 {:else if value === 1}
-  <img alt="1" src="/icons/square_1.png" />
+  <img alt="1" src="/icons/square_1.png" draggable="false" />
 {:else if value === 2}
-  <img alt="2" src="/icons/square_2.png" />
+  <img alt="2" src="/icons/square_2.png" draggable="false" />
 {:else if value === 3}
-  <img alt="3" src="/icons/square_3.png" />
+  <img alt="3" src="/icons/square_3.png" draggable="false" />
 {/if}
 
 <style>
