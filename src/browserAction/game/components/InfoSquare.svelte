@@ -38,8 +38,8 @@
   .grid-container {
     user-select: none;
 
-    width: 54px;
-    height: 54px;
+    width: 53px;
+    height: 53px;
     display: grid;
     row-gap: 10px;
     outline: 4px solid #d0e8e0;
