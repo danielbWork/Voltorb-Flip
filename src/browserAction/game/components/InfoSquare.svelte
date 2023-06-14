@@ -46,6 +46,7 @@
     font-size: 20px;
     text-align: right;
     padding-right: 4px;
+    color: #404040;
   }
 
   .sum-item {

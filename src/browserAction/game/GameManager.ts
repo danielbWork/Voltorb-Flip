@@ -1,6 +1,6 @@
 import { getLevelInfo } from "./LevelInfo";
 import { BoardSquare, LineSum } from "./types";
-
+// TODO see if this should be store
 /**
  * Manages the game state and board
  */
@@ -11,11 +11,27 @@ export class GameManager {
   level = 0;
 
   /**
+   * The total score from the start of the game
+   */
+  totalScore = 0;
+
+  /**
+   * THe current score of the current game
+   */
+  currentScore = 0;
+
+  /**
    * The current board of the game
    */
   board: BoardSquare[][];
 
+  /**
+   * The sums of values and voltorbs in each row
+   */
   rowSums: LineSum[] = [];
+  /**
+   * The sums of values and voltorbs in each column
+   */
   colSums: LineSum[] = [];
 
   constructor() {

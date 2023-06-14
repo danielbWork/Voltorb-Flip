@@ -21,7 +21,11 @@
   }
 </script>
 
-<ScoreDisplay />
+<ScoreDisplay
+  level={game.level}
+  currentScore={game.currentScore}
+  totalScore={game.totalScore}
+/>
 
 <div class="grid-container">
   {#each board as row, rowIndex}
