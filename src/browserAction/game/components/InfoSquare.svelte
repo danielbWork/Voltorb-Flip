@@ -36,11 +36,14 @@
 
 <style>
   .grid-container {
+    user-select: none;
+
     width: 54px;
     height: 54px;
     display: grid;
     row-gap: 10px;
     outline: 4px solid #d0e8e0;
+    border-radius: 1px;
   }
   span {
     font-size: 20px;

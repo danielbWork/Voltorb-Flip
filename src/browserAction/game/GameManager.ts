@@ -21,6 +21,11 @@ export class GameManager {
   currentScore = 0;
 
   /**
+   * The number of valid number still left on the board until we need to go to the next level
+   */
+  validNumberCount = 0;
+
+  /**
    * The current board of the game
    */
   board: BoardSquare[][];
@@ -39,6 +44,27 @@ export class GameManager {
     this.calculateLineSums();
   }
 
+  selectSquare(row: number, col: number) {
+    const square = this.board[row][col];
+    square.isHidden = false;
+
+    if (square.value > 0) {
+      this.currentScore =
+        this.currentScore === 0
+          ? square.value
+          : this.currentScore * square.value;
+      if (square.value > 1) {
+        this.validNumberCount--;
+      }
+
+      if (this.validNumberCount === 0) {
+        // TODO add update to new level
+      }
+    } else {
+      // TODO Start heat death of universe
+    }
+  }
+
   /**
    * Generates a basic board state
    */
@@ -47,7 +73,9 @@ export class GameManager {
 
     const levelInfo = getLevelInfo(this.level);
 
-    const numberSelection = [
+    this.validNumberCount = levelInfo.double + levelInfo.triple;
+
+    let numberSelection = [
       ...Array(levelInfo.double).fill(2),
       ...Array(levelInfo.triple).fill(3),
       ...Array(levelInfo.voltorb).fill(0),
@@ -60,8 +88,12 @@ export class GameManager {
       const row = [];
 
       for (let colIndex = 0; colIndex < 5; colIndex++) {
-        let value =
-          numberSelection[Math.floor(Math.random() * numberSelection.length)];
+        const removedRandomItemArray = numberSelection.splice(
+          Math.floor(Math.random() * numberSelection.length),
+          1
+        );
+
+        let value = removedRandomItemArray[0];
 
         // Shiny check
         if (value === 0 && Math.random() * 8192 === 0) {

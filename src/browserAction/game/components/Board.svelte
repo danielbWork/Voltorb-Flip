@@ -6,7 +6,7 @@
 
   const infoColors = ["#e07050", "#40a840", "#e8a038", "#3090f8", "#c060e0"];
 
-  const game = new GameManager();
+  let game = new GameManager();
 
   $: board = game.board;
 
@@ -16,8 +16,12 @@
 
   function handleHiddenClick(event) {
     console.log(event);
-    const id = event.detail.id;
-    board[id.rowIndex][id.colIndex].isHidden = false;
+    const { rowIndex, colIndex } = event.detail.id;
+
+    //TODO add animations when possible
+
+    game.selectSquare(rowIndex, colIndex);
+    game = game;
   }
 </script>
 
@@ -53,6 +57,8 @@
 <!-- TODO find why padding is needed here -->
 <style>
   .grid-container {
+    user-select: none;
+
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     row-gap: 16px;
