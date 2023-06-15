@@ -54,11 +54,12 @@
   }
   .overlay {
     position: fixed;
-    width: 53px;
-    height: 53px;
+    width: 54px;
+    height: 54px;
     z-index: 1;
     border-radius: 1px;
     outline: 4px solid #d0e8e0;
+    background-color: #d0e8e0;
   }
   img {
     margin-bottom: -2px;
