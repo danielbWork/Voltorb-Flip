@@ -26,9 +26,14 @@ export class GameManager {
   validNumberCount = 0;
 
   /**
+   * How many moves has the player made in this level, used if they fail the level
+   */
+  moveCount = 0;
+
+  /**
    * The current board of the game
    */
-  board: BoardSquare[][];
+  board: BoardSquare[][] = [];
 
   /**
    * The sums of values and voltorbs in each row
@@ -40,28 +45,73 @@ export class GameManager {
   colSums: LineSum[] = [];
 
   constructor() {
+    this.updateToLevel(0);
+  }
+
+  /**
+   *  Updates the level for the board
+   * @param wasSuccessful Whether or not the play found all 2s and 3s or not,
+   * used to select if going back or forward in levels.
+   */
+  updateLevel(wasSuccessful: boolean) {
+    if (wasSuccessful) {
+      // TODO Add Alert and general animation
+
+      // TODO maybe add something for first time bitting level 8
+
+      // 7 since we have 8 difficulty levels and starts at 0
+      this.updateToLevel(Math.min(this.level + 1, 7));
+    } else {
+      // TODO Add Alert and explode animation
+      this.updateToLevel(Math.min(this.level, this.moveCount));
+    }
+  }
+
+  /**
+   * Updates the game state to a new level, updating all related fields
+   * @param level The new level the game moved to
+   */
+  private updateToLevel(level: number) {
+    this.level = level;
+
+    this.totalScore += this.currentScore;
+    this.currentScore = 0;
+    this.moveCount = 0;
+
     this.board = this.generateBoard();
     this.calculateLineSums();
   }
 
-  selectSquare(row: number, col: number) {
+  /**
+   * Reveals teh square content and updates all relevant scores
+   * @param row The row of the square
+   * @param col  The column of the square
+   * @returns undefined if voltorb wasn't selected or there are still 2 and or
+   * 3s to find otherwise returns a boolean if was successful or not
+   */
+  selectSquare(row: number, col: number): any {
     const square = this.board[row][col];
     square.isHidden = false;
 
     if (square.value > 0) {
+      this.moveCount++;
+
+      // Avoids 0 multiplication
       this.currentScore =
         this.currentScore === 0
           ? square.value
           : this.currentScore * square.value;
+
       if (square.value > 1) {
         this.validNumberCount--;
       }
 
       if (this.validNumberCount === 0) {
-        // TODO add update to new level
+        return true;
       }
     } else {
-      // TODO Start heat death of universe
+      this.currentScore = 0; //TODO Maybe do somewhere else
+      return false;
     }
   }
 

@@ -20,7 +20,19 @@
 
     //TODO add animations when possible
 
-    game.selectSquare(rowIndex, colIndex);
+    const levelEnded = game.selectSquare(rowIndex, colIndex);
+
+    if (levelEnded !== undefined) {
+      //TODO Add animations
+      if (levelEnded) {
+      } else {
+      }
+
+      // TODO make alert look better
+      alert(levelEnded ? "Game clear!" : "Oh no! You get 0 Coins!");
+      game.updateLevel(levelEnded);
+    }
+
     game = game;
   }
 </script>
@@ -52,6 +64,7 @@
   {#each colSums as { sum, voltorbCount }, index}
     <InfoSquare {sum} {voltorbCount} color={infoColors[index]} />
   {/each}
+  <!-- TODO add memo here -->
 </div>
 
 <!-- TODO find why padding is needed here -->
