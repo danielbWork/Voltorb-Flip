@@ -8,6 +8,8 @@
 
   let game = new GameManager();
 
+  let finishedLevel = false;
+
   $: board = game.board;
 
   $: rowSums = game.rowSums;
@@ -23,16 +25,19 @@
     const levelEnded = game.selectSquare(rowIndex, colIndex);
 
     if (levelEnded !== undefined) {
+      finishedLevel = true;
+
       //TODO Add animations
-      if (levelEnded) {
+      if (!levelEnded) {
       } else {
       }
 
-      // TODO make alert look better
+      // TODO make alert look better and not block finished level
       alert(levelEnded ? "Game clear!" : "Oh no! You get 0 Coins!");
       game.updateLevel(levelEnded);
     }
 
+    finishedLevel = false;
     game = game;
   }
 </script>
@@ -49,7 +54,7 @@
       <Square
         id={{ rowIndex, colIndex }}
         value={square.value}
-        isHidden={square.isHidden}
+        isHidden={square.isHidden && !finishedLevel}
         on:hiddenClick={handleHiddenClick}
       />
     {/each}
