@@ -55,6 +55,8 @@
         id={{ rowIndex, colIndex }}
         value={square.value}
         isHidden={square.isHidden && !finishedLevel}
+        rowGapColor={infoColors[rowIndex]}
+        colGapColor={infoColors[colIndex]}
         on:hiddenClick={handleHiddenClick}
       />
     {/each}
@@ -79,8 +81,7 @@
 
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
-    row-gap: 16px;
-    column-gap: 1px;
+    gap: 0px;
     padding: 30px;
   }
 </style>

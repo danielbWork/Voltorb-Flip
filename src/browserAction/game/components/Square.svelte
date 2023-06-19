@@ -15,6 +15,16 @@
    */
   export let id;
 
+  /**
+   * The color used for the line between this square and the one to the right of it
+   */
+  export let rowGapColor;
+
+  /**
+   * The color used for the line between this square and the one below it
+   */
+  export let colGapColor;
+
   const dispatch = createEventDispatcher();
 
   function onHiddenClick() {
@@ -24,37 +34,65 @@
 
 <!-- TODO add red overlay for last selected should work the same with memo -->
 
-<div class="flip-box">
-  <div class="flip-box-inner" class:flip-it={!isHidden}>
-    <div class="flip-box-front">
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <img
-        on:click={onHiddenClick}
-        alt="hidden"
-        src="/icons/hidden_square.png"
-        draggable="false"
-      />
-      <div class="overlay" />
-    </div>
+<div class="grided-square">
+  <div class="flip-box">
+    <div class="flip-box-inner" class:flip-it={!isHidden}>
+      <div class="flip-box-front">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <img
+          on:click={onHiddenClick}
+          alt="hidden"
+          src="/icons/hidden_square.png"
+          draggable="false"
+        />
+        <div class="overlay" />
+      </div>
 
-    <div class="flip-box-back">
-      <!-- TODO maybe choose better images -->
-      {#if value === -1}
-        <img alt="0" src="/icons/shiny_voltorb.png" draggable="false" />
-      {:else if value === 0}
-        <img alt="0" src="/icons/voltorb.png" draggable="false" />
-      {:else if value === 1}
-        <img alt="1" src="/icons/square_1.png" draggable="false" />
-      {:else if value === 2}
-        <img alt="2" src="/icons/square_2.png" draggable="false" />
-      {:else if value === 3}
-        <img alt="3" src="/icons/square_3.png" draggable="false" />
-      {/if}
+      <div class="flip-box-back">
+        <!-- TODO maybe choose better images -->
+        {#if value === -1}
+          <img alt="0" src="/icons/shiny_voltorb.png" draggable="false" />
+        {:else if value === 0}
+          <img alt="0" src="/icons/voltorb.png" draggable="false" />
+        {:else if value === 1}
+          <img alt="1" src="/icons/square_1.png" draggable="false" />
+        {:else if value === 2}
+          <img alt="2" src="/icons/square_2.png" draggable="false" />
+        {:else if value === 3}
+          <img alt="3" src="/icons/square_3.png" draggable="false" />
+        {/if}
+      </div>
     </div>
   </div>
+
+  <div class="row-line" style="background-color: {rowGapColor};" />
+  <div class="col-line" style="background-color: {colGapColor};" />
 </div>
 
 <style>
+  .grided-square {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0px;
+  }
+
+  .row-line {
+    width: 16px;
+    height: 10px;
+    border-top: 4px solid #d0e8e0;
+    border-bottom: 4px solid #d0e8e0;
+    margin-top: 17px;
+    z-index: 2;
+  }
+
+  .col-line {
+    width: 10px;
+    height: 14px;
+    border: 4px solid #d0e8e0;
+    margin-left: 17px;
+    z-index: 2;
+  }
+
   img {
     margin-bottom: -2px;
     width: inherit;
@@ -67,9 +105,10 @@
     height: 54px;
     border-radius: 1px;
     outline: 4px solid #d0e8e0;
-    background-color: #d0e8e0;
+    background-color: #404040;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     display: block;
+    z-index: 1;
   }
 
   /* This container is needed to position the front and back side */
