@@ -10,35 +10,56 @@
 
   let finishedLevel = false;
 
+  let midClick = false;
+
   $: board = game.board;
 
   $: rowSums = game.rowSums;
 
   $: colSums = game.colSums;
 
-  function handleHiddenClick(event) {
+  async function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function handleHiddenClick(event) {
+    if (midClick) return;
+
+    midClick = true;
+
     console.log(event);
     const { rowIndex, colIndex } = event.detail.id;
 
     //TODO add animations when possible
 
     const levelEnded = game.selectSquare(rowIndex, colIndex);
+    game = game;
 
     if (levelEnded !== undefined) {
-      finishedLevel = true;
+      // First square
+      await delay(300);
 
-      //TODO Add animations
+      //TODO Add explode animation
+
       if (!levelEnded) {
-      } else {
+        await delay(300);
       }
 
-      // TODO make alert look better and not block finished level
+      finishedLevel = true;
+
+      // Other squares update
+      await delay(100);
+
+      // TODO make alert look better
       alert(levelEnded ? "Game clear!" : "Oh no! You get 0 Coins!");
       game.updateLevel(levelEnded);
+
+      await delay(50);
+      finishedLevel = false;
+      game = game;
     }
 
-    finishedLevel = false;
-    game = game;
+    midClick = false;
   }
 </script>
 
