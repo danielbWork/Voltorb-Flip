@@ -16,14 +16,19 @@
   export let id;
 
   /**
-   * The color used for the line between this square and the one to the right of it
+   * @param {number} rowGapColor The color used for the line between this square and the one to the right of it
    */
   export let rowGapColor;
 
   /**
-   * The color used for the line between this square and the one below it
+   * @param {number} colGapColor The color used for the line between this square and the one below it
    */
   export let colGapColor;
+
+  /**
+   * @param {boolean} shouldExplode Whetehter or not the explosion animation should be displayed here
+   */
+  export let hasExploded;
 
   const dispatch = createEventDispatcher();
 
@@ -53,7 +58,17 @@
         {#if value === -1}
           <img alt="0" src="/icons/shiny_voltorb.png" draggable="false" />
         {:else if value === 0}
-          <img alt="0" src="/icons/voltorb.png" draggable="false" />
+          <div class="voltorb-parent">
+            {#if hasExploded}
+              <img
+                alt="0"
+                src="/icons/explosion.gif"
+                draggable="false"
+                class="explosion"
+              />
+            {/if}
+            <img alt="0" src="/icons/voltorb.png" draggable="false" />
+          </div>
         {:else if value === 1}
           <img alt="1" src="/icons/square_1.png" draggable="false" />
         {:else if value === 2}
@@ -93,8 +108,25 @@
     z-index: 2;
   }
 
+  .voltorb-parent {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+
+  .voltorb-parent > img {
+    position: fixed;
+  }
+
   img {
     margin-bottom: -2px;
+    width: inherit;
+    height: inherit;
+    z-index: -1;
+  }
+
+  .explosion {
+    z-index: 2;
     width: inherit;
     height: inherit;
   }

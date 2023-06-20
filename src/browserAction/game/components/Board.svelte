@@ -18,6 +18,8 @@
 
   $: colSums = game.colSums;
 
+  let explosionId = undefined;
+
   async function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -30,8 +32,6 @@
     console.log(event);
     const { rowIndex, colIndex } = event.detail.id;
 
-    //TODO add animations when possible
-
     const levelEnded = game.selectSquare(rowIndex, colIndex);
     game = game;
 
@@ -39,12 +39,11 @@
       // First square
       await delay(300);
 
-      //TODO Add explode animation
-
       if (!levelEnded) {
-        await delay(300);
+        explosionId = event.detail.id;
+        await delay(700);
       }
-
+      explosionId = undefined;
       finishedLevel = true;
 
       // Other squares update
@@ -78,6 +77,8 @@
         isHidden={square.isHidden && !finishedLevel}
         rowGapColor={infoColors[rowIndex]}
         colGapColor={infoColors[colIndex]}
+        hasExploded={explosionId?.rowIndex === rowIndex &&
+          explosionId.colIndex === colIndex}
         on:hiddenClick={handleHiddenClick}
       />
     {/each}

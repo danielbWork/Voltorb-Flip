@@ -55,14 +55,12 @@ export class GameManager {
    */
   updateLevel(wasSuccessful: boolean) {
     if (wasSuccessful) {
-      // TODO Add Alert and general animation
-
       // TODO maybe add something for first time bitting level 8
 
       // 7 since we have 8 difficulty levels and starts at 0
       this.updateToLevel(Math.min(this.level + 1, 7));
     } else {
-      // TODO Add Alert and explode animation
+      this.currentScore = 0;
       this.updateToLevel(Math.min(this.level, this.moveCount));
     }
   }
@@ -110,7 +108,6 @@ export class GameManager {
         return true;
       }
     } else {
-      this.currentScore = 0; //TODO Maybe do somewhere else
       return false;
     }
   }
