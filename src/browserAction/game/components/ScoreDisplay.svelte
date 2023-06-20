@@ -40,6 +40,6 @@
 
   .container {
     padding-top: 15px;
-    padding-left: 25px;
+    padding-left: 20px;
   }
 </style>
