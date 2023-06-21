@@ -26,22 +26,35 @@
   export let colGapColor;
 
   /**
-   * @param {boolean} shouldExplode Whetehter or not the explosion animation should be displayed here
+   * @param {boolean} hasExploded Whether or not the explosion animation should be displayed here
    */
   export let hasExploded;
+
+  /**
+   * @param {boolean} selected Marks this square as the last one selected by the user
+   */
+  export let selected;
 
   const dispatch = createEventDispatcher();
 
   function onHiddenClick() {
     dispatch("hiddenClick", { id });
   }
+
+  function onRevealClick() {
+    dispatch("revealClick", { id });
+  }
 </script>
 
 <!-- TODO add red overlay for last selected should work the same with memo -->
 
 <div class="grided-square">
-  <div class="flip-box">
-    <div class="flip-box-inner" class:flip-it={!isHidden}>
+  <div class="flip-box" class:flip-box-selected={selected}>
+    <div
+      class="flip-box-inner"
+      class:flip-it={!isHidden}
+      class:flip-box-inner-selected={selected}
+    >
       <div class="flip-box-front">
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img
@@ -53,7 +66,7 @@
         <div class="overlay" />
       </div>
 
-      <div class="flip-box-back">
+      <div class="flip-box-back" on:click={onRevealClick}>
         <!-- TODO maybe choose better images -->
         {#if value === -1}
           <img alt="0" src="/icons/shiny_voltorb.png" draggable="false" />
@@ -143,6 +156,13 @@
     z-index: 1;
   }
 
+  /* TODO see if selected overlay can look better */
+  .flip-box-selected {
+    outline: 6px solid #683028;
+    z-index: 3;
+    outline-offset: -2px;
+  }
+
   /* This container is needed to position the front and back side */
   .flip-box-inner {
     transition: transform 0.3s;
@@ -150,6 +170,14 @@
     border: 2px solid #282828;
     width: 50px;
     height: 50px;
+  }
+
+  .flip-box-inner-selected {
+    border-radius: 2px;
+    outline: 4px solid #f84030;
+    border-spacing: 0px;
+    border: 2px solid #f84030;
+    outline-offset: -2px;
   }
 
   /* Do an horizontal flip when you move the mouse over the flip box container */

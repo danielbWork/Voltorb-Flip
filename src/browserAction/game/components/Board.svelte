@@ -20,6 +20,14 @@
 
   let explosionId = undefined;
 
+  let selectedId = { rowIndex: 0, colIndex: 0 };
+
+  function compareIds(a, b) {
+    return (
+      a === b || (a?.rowIndex === b?.rowIndex && a?.colIndex === b?.colIndex)
+    );
+  }
+
   async function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -31,6 +39,8 @@
 
     console.log(event);
     const { rowIndex, colIndex } = event.detail.id;
+
+    selectedId = event.detail.id;
 
     const levelEnded = game.selectSquare(rowIndex, colIndex);
     game = game;
@@ -60,6 +70,16 @@
 
     midClick = false;
   }
+
+  function handleRevealClick(event) {
+    if (midClick) return;
+
+    midClick = true;
+
+    selectedId = event.detail.id;
+
+    midClick = false;
+  }
 </script>
 
 <ScoreDisplay
@@ -67,7 +87,7 @@
   currentScore={game.currentScore}
   totalScore={game.totalScore}
 />
-
+<!-- TODO Check first explosion being weird -->
 <div class="grid-container">
   {#each board as row, rowIndex}
     {#each row as square, colIndex}
@@ -77,9 +97,10 @@
         isHidden={square.isHidden && !finishedLevel}
         rowGapColor={infoColors[rowIndex]}
         colGapColor={infoColors[colIndex]}
-        hasExploded={explosionId?.rowIndex === rowIndex &&
-          explosionId.colIndex === colIndex}
+        hasExploded={compareIds(explosionId, { rowIndex, colIndex })}
+        selected={compareIds(selectedId, { rowIndex, colIndex })}
         on:hiddenClick={handleHiddenClick}
+        on:revealClick={handleRevealClick}
       />
     {/each}
 
