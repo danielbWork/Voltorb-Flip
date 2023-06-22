@@ -11,13 +11,21 @@
 
   let midClick = false;
 
+  /**
+   * Utils function for async code to delay for a certain time
+   * @param ms How long we need to wait
+   */
   async function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   // TODO decide if this best way to handle this
 
-  async function handleSquareSelection(id) {
+  /**
+   * Handles user "flipping" a hidden square open ant reacts accordingly
+   * @param id The id of the square that was pressed
+   */
+  async function handleHiddenSquareFlip(id) {
     if (midClick) return;
 
     midClick = true;
@@ -55,10 +63,18 @@
     midClick = false;
   }
 
+  /**
+   * Reacts to the user clicking with their mouse on a hidden square
+   * @param event Clicking event used mainly for the id of the clicked square
+   */
   async function handleHiddenClick(event) {
-    handleSquareSelection(event.detail.id);
+    handleHiddenSquareFlip(event.detail.id);
   }
 
+  /**
+   * Reacts to the user clicking with their mouse on a revealed square
+   * @param event Clicking event used mainly for the id of the clicked square
+   */
   function handleRevealClick(event) {
     if (midClick) return;
 
@@ -69,13 +85,12 @@
     midClick = false;
   }
 
-  function handleOnKeydown(event) {
-    key = event.key;
-    console.log(event);
-    console.log(key);
-
+  /**
+   * Handles the user pressing one of the arrow keys and updates the selected square
+   * @param key The key the user pressed
+   */
+  function handleArrowClick(key) {
     let { rowIndex, colIndex } = game.selectedId;
-    // TODO maybe enable keybind selection
     switch (key) {
       case "ArrowUp":
         rowIndex--;
@@ -102,18 +117,31 @@
 
         break;
 
-      case " ":
-        if (game.board[rowIndex][colIndex].isHidden) {
-          handleSquareSelection(game.selectedId);
-        }
-
-        break;
-
       default:
         break;
     }
 
     game.selectedId = { colIndex, rowIndex };
+  }
+
+  /**
+   * Handles user pressing a keyboard button and acts accordingly
+   * @param event The keyboard event mainly used for the key value
+   */
+  function handleOnKeydown(event) {
+    key = event.key;
+    // TODO maybe enable keybind selection
+
+    if (key.includes("Arrow")) {
+      handleArrowClick(key);
+      return;
+    }
+
+    if (key === " ") {
+      if (game.board[rowIndex][colIndex].isHidden) {
+        handleHiddenSquareFlip(game.selectedId);
+      }
+    }
   }
 </script>
 
