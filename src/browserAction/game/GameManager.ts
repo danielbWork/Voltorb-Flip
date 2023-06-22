@@ -44,6 +44,8 @@ export class GameManager {
    */
   colSums: LineSum[] = [];
 
+  selectedId = { rowIndex: 0, colIndex: 0 };
+
   constructor() {
     this.updateToLevel(0);
   }

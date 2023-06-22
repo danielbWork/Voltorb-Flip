@@ -1,11 +1,9 @@
 <script>
-  import Board from "./game/components/Board.svelte";
-
-  let test = "test";
+  import Game from "./game/components/Game.svelte";
 </script>
 
 <div>
-  <Board />
+  <Game />
 </div>
 
 <style>
