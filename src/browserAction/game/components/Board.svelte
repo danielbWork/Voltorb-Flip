@@ -32,15 +32,14 @@
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  async function handleHiddenClick(event) {
+  async function handleSquareSelection(id) {
     if (midClick) return;
 
     midClick = true;
 
-    console.log(event);
-    const { rowIndex, colIndex } = event.detail.id;
+    const { rowIndex, colIndex } = id;
 
-    selectedId = event.detail.id;
+    selectedId = id;
 
     const levelEnded = game.selectSquare(rowIndex, colIndex);
     game = game;
@@ -71,6 +70,10 @@
     midClick = false;
   }
 
+  async function handleHiddenClick(event) {
+    handleSquareSelection(event.detail.id);
+  }
+
   function handleRevealClick(event) {
     if (midClick) return;
 
@@ -79,6 +82,53 @@
     selectedId = event.detail.id;
 
     midClick = false;
+  }
+
+  function handleOnKeydown(event) {
+    key = event.key;
+    console.log(event);
+    console.log(key);
+
+    let { rowIndex, colIndex } = selectedId;
+    // TODO maybe enable keybind selection
+    switch (key) {
+      case "ArrowUp":
+        rowIndex--;
+
+        if (rowIndex < 0) rowIndex = 4;
+
+        break;
+      case "ArrowDown":
+        rowIndex++;
+
+        if (rowIndex > 4) rowIndex = 0;
+
+        break;
+      case "ArrowLeft":
+        colIndex--;
+
+        if (colIndex < 0) colIndex = 4;
+
+        break;
+      case "ArrowRight":
+        colIndex++;
+
+        if (colIndex > 4) colIndex = 0;
+
+        break;
+
+      case " ":
+        if (board[rowIndex][colIndex].isHidden) {
+          handleSquareSelection(selectedId);
+        }
+
+        break;
+
+      default:
+        break;
+    }
+
+    selectedId = { colIndex, rowIndex };
   }
 </script>
 
@@ -116,6 +166,8 @@
   {/each}
   <!-- TODO add memo here -->
 </div>
+
+<svelte:window on:keydown|preventDefault={handleOnKeydown} />
 
 <!-- TODO find why padding is needed here -->
 <style>
