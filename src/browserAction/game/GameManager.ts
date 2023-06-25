@@ -63,7 +63,7 @@ export class GameManager {
       this.updateToLevel(Math.min(this.level + 1, 7));
     } else {
       this.currentScore = 0;
-      this.updateToLevel(Math.min(this.level, this.moveCount));
+      this.updateToLevel(Math.min(this.level, Math.max(0, this.moveCount - 1)));
     }
   }
 
