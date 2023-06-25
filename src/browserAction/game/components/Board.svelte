@@ -36,6 +36,7 @@
         colGapColor={infoColors[colIndex]}
         hasExploded={compareIds(explosionId, { rowIndex, colIndex })}
         selected={compareIds(selectedId, { rowIndex, colIndex })}
+        memos={square.memos}
         on:hiddenClick
         on:revealClick
       />

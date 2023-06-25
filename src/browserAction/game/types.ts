@@ -4,6 +4,7 @@
 export type BoardSquare = {
   isHidden: boolean;
   value: number;
+  memos: boolean[];
 };
 
 /**

@@ -35,6 +35,11 @@
    */
   export let selected;
 
+  /**
+   * @param {boolean[]} memos Marks the memos to display
+   */
+  export let memos;
+
   const dispatch = createEventDispatcher();
 
   function onHiddenClick() {
@@ -46,7 +51,9 @@
   }
 </script>
 
-<!-- TODO add red overlay for last selected should work the same with memo -->
+<!-- TODO add Memo overlay -->
+
+<!-- TODO Create better quality versions of current pictures as they look bad-->
 
 <div class="grided-square">
   <div class="flip-box" class:flip-box-selected={selected}>
@@ -55,17 +62,59 @@
       class:flip-it={!isHidden}
       class:flip-box-inner-selected={selected}
     >
-      <div class="flip-box-front">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div class="flip-box-front" on:click={onHiddenClick}>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <img
-          on:click={onHiddenClick}
-          alt="hidden"
-          src="/icons/hidden_square.png"
-          draggable="false"
-        />
-        <div class="overlay" />
+        <img alt="hidden" src="/icons/hidden_square.png" draggable="false" />
+
+        <div class="memo-container">
+          {#if memos[0]}
+            <img
+              alt="0"
+              src="/icons/memo-0.svg"
+              draggable="false"
+              class="memo-image"
+              style=" top: 0;
+          left: 0;"
+            />
+          {/if}
+
+          {#if memos[1]}
+            <img
+              alt="1"
+              src="/icons/memo-1.svg"
+              draggable="false"
+              class="memo-image"
+              style=" top: 0;
+         right: 0;"
+            />
+          {/if}
+
+          {#if memos[2]}
+            <img
+              alt="2"
+              src="/icons/memo-2.svg"
+              draggable="false"
+              class="memo-image"
+              style=" bottom: 0;
+          left: 0;"
+            />
+          {/if}
+
+          {#if memos[3]}
+            <img
+              alt="3"
+              src="/icons/memo-3.svg"
+              draggable="false"
+              class="memo-image"
+              style=" bottom: 0;
+          right: 0;"
+            />
+          {/if}
+        </div>
       </div>
 
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="flip-box-back" on:click={onRevealClick}>
         <!-- TODO maybe choose better images -->
         {#if value === -1}
@@ -138,6 +187,21 @@
     z-index: -1;
   }
 
+  .memo-image {
+    margin-bottom: 0px;
+    width: 10px;
+    height: 10px;
+    z-index: 0;
+    padding: 3px;
+    position: absolute;
+  }
+
+  .memo-container {
+    position: fixed;
+    width: inherit;
+    height: inherit;
+  }
+
   .explosion {
     z-index: 2;
     width: inherit;
@@ -192,11 +256,15 @@
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    display: inline;
+  }
+
+  .flip-box-front {
+    display: flex;
   }
 
   /* Style the back side */
   .flip-box-back {
+    display: inline;
     transform: rotateY(-180deg);
   }
 </style>

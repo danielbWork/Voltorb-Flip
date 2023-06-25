@@ -149,7 +149,11 @@ export class GameManager {
           value = -1;
         }
 
-        row.push({ isHidden: true, value });
+        row.push({
+          isHidden: true,
+          value,
+          memos: [false, false, false, false],
+        });
       }
 
       board.push(row);
