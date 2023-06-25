@@ -121,7 +121,7 @@
         break;
     }
 
-    game.selectedId = { colIndex, rowIndex };
+    game.selectedId = { rowIndex, colIndex };
   }
 
   /**
@@ -136,6 +136,8 @@
       handleArrowClick(key);
       return;
     }
+
+    let { rowIndex, colIndex } = game.selectedId;
 
     if (key === " ") {
       if (game.board[rowIndex][colIndex].isHidden) {
