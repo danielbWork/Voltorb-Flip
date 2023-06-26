@@ -1,12 +1,24 @@
 <script>
   import InfoSquare from "./InfoSquare.svelte";
-  import ScoreDisplay from "./ScoreDisplay.svelte";
-  import Square from "./Square.svelte";
+  import Square from "./Square/Square.svelte";
 
   const infoColors = ["#e07050", "#40a840", "#e8a038", "#3090f8", "#c060e0"];
 
+  /**
+   * @type {import ("../GameManager.js").GameManager} The game manger we get the info from
+   */
   export let game;
+
+  // TODO see if this two should be in game manager
+
+  /**
+   * @type {boolean} Whether or not we finished the current level or not so we can display all hidden squares
+   */
   export let finishedLevel;
+
+  /**
+   * @type {{rowIndex:number colIndex:number}} The id of the selected voltorb that should explode
+   */
   export let explosionId;
 
   let isMemoOpen = false;
@@ -85,6 +97,8 @@
   }
 
   .memo-button {
-    margin-top: -4px;
+    margin-top: -2px;
+    width: 56px;
+    height: 64px;
   }
 </style>
