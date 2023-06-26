@@ -40,6 +40,11 @@
    */
   export let memos;
 
+  /**
+   * @param {boolean} isMemoOpen Marks if we need to enable memo mode based ui
+   */
+  export let isMemoOpen;
+
   const dispatch = createEventDispatcher();
 
   function onHiddenClick() {
@@ -56,22 +61,33 @@
 <!-- TODO Create better quality versions of current pictures as they look bad-->
 
 <div class="grided-square">
-  <div class="flip-box" class:flip-box-selected={selected}>
+  <div
+    class="flip-box"
+    class:flip-box-selected={selected}
+    class:flip-box-selected-memo={selected && isMemoOpen}
+  >
     <div
       class="flip-box-inner"
       class:flip-it={!isHidden}
       class:flip-box-inner-selected={selected}
+      class:flip-box-inner-selected-memo={selected && isMemoOpen}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="flip-box-front" on:click={onHiddenClick}>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <img alt="hidden" src="/icons/hidden_square.png" draggable="false" />
+        <img
+          class="square-image"
+          alt="hidden"
+          src="/icons/hidden_square.png"
+          draggable="false"
+        />
 
+        <!-- TODO maybe move this to other component -->
         <div class="memo-container">
           {#if memos[0]}
             <img
               alt="0"
-              src="/icons/memo-0.svg"
+              src="/icons/memo_0.svg"
               draggable="false"
               class="memo-image"
               style=" top: 0;
@@ -82,7 +98,7 @@
           {#if memos[1]}
             <img
               alt="1"
-              src="/icons/memo-1.svg"
+              src="/icons/memo_1.svg"
               draggable="false"
               class="memo-image"
               style=" top: 0;
@@ -93,7 +109,7 @@
           {#if memos[2]}
             <img
               alt="2"
-              src="/icons/memo-2.svg"
+              src="/icons/memo_2.svg"
               draggable="false"
               class="memo-image"
               style=" bottom: 0;
@@ -104,11 +120,20 @@
           {#if memos[3]}
             <img
               alt="3"
-              src="/icons/memo-3.svg"
+              src="/icons/memo_3.svg"
               draggable="false"
               class="memo-image"
               style=" bottom: 0;
           right: 0;"
+            />
+          {/if}
+
+          {#if selected && isMemoOpen}
+            <img
+              alt="pencil"
+              src="/icons/memo_pencil.png"
+              draggable="false"
+              class="memo-pencil"
             />
           {/if}
         </div>
@@ -118,7 +143,22 @@
       <div class="flip-box-back" on:click={onRevealClick}>
         <!-- TODO maybe choose better images -->
         {#if value === -1}
-          <img alt="0" src="/icons/shiny_voltorb.png" draggable="false" />
+          <div class="voltorb-parent">
+            <img
+              class="square-image"
+              alt="-1"
+              src="/icons/shiny_voltorb.png"
+              draggable="false"
+            />
+            {#if hasExploded}
+              <img
+                alt="0"
+                src="/icons/explosion.gif"
+                draggable="false"
+                class="explosion"
+              />
+            {/if}
+          </div>
         {:else if value === 0}
           <div class="voltorb-parent">
             {#if hasExploded}
@@ -129,14 +169,34 @@
                 class="explosion"
               />
             {/if}
-            <img alt="0" src="/icons/voltorb.png" draggable="false" />
+            <img
+              class="square-image"
+              alt="0"
+              src="/icons/voltorb.png"
+              draggable="false"
+            />
           </div>
         {:else if value === 1}
-          <img alt="1" src="/icons/square_1.png" draggable="false" />
+          <img
+            class="square-image"
+            alt="1"
+            src="/icons/square_1.png"
+            draggable="false"
+          />
         {:else if value === 2}
-          <img alt="2" src="/icons/square_2.png" draggable="false" />
+          <img
+            class="square-image"
+            alt="2"
+            src="/icons/square_2.png"
+            draggable="false"
+          />
         {:else if value === 3}
-          <img alt="3" src="/icons/square_3.png" draggable="false" />
+          <img
+            class="square-image"
+            alt="3"
+            src="/icons/square_3.png"
+            draggable="false"
+          />
         {/if}
       </div>
     </div>
@@ -180,7 +240,7 @@
     position: fixed;
   }
 
-  img {
+  .square-image {
     margin-bottom: -2px;
     width: inherit;
     height: inherit;
@@ -200,6 +260,13 @@
     position: fixed;
     width: inherit;
     height: inherit;
+  }
+
+  .memo-pencil {
+    width: 25px;
+    height: 25px;
+    margin-top: 12px;
+    margin-left: 12px;
   }
 
   .explosion {
@@ -226,6 +293,10 @@
     z-index: 3;
   }
 
+  .flip-box-selected-memo {
+    outline: 4px solid #785820;
+  }
+
   /* This container is needed to position the front and back side */
   .flip-box-inner {
     transition: transform 0.3s;
@@ -241,6 +312,11 @@
     border-spacing: 0px;
     border: 2px solid #f84030;
     outline-offset: -2px;
+  }
+
+  .flip-box-inner-selected-memo {
+    outline: 4px solid #f8b830;
+    border: 2px solid #f8b830;
   }
 
   /* Do an horizontal flip when you move the mouse over the flip box container */

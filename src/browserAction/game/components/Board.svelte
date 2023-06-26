@@ -9,6 +9,8 @@
   export let finishedLevel;
   export let explosionId;
 
+  let isMemoOpen = false;
+
   $: board = game.board;
 
   $: rowSums = game.rowSums;
@@ -16,6 +18,10 @@
   $: colSums = game.colSums;
 
   $: selectedId = game.selectedId;
+
+  function toggleIsMemoOpen() {
+    isMemoOpen = !isMemoOpen;
+  }
 
   function compareIds(a, b) {
     return (
@@ -37,6 +43,7 @@
         hasExploded={compareIds(explosionId, { rowIndex, colIndex })}
         selected={compareIds(selectedId, { rowIndex, colIndex })}
         memos={square.memos}
+        {isMemoOpen}
         on:hiddenClick
         on:revealClick
       />
@@ -52,6 +59,17 @@
   {#each colSums as { sum, voltorbCount }, index}
     <InfoSquare {sum} {voltorbCount} color={infoColors[index]} />
   {/each}
+
+  <!-- TODO add animation for open close and onkeydown -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <img
+    alt="memo"
+    src={isMemoOpen ? "/icons/close_memo.png" : "/icons/open_memo.png"}
+    draggable="false"
+    class="memo-button"
+    on:click={toggleIsMemoOpen}
+  />
+
   <!-- TODO add memo here -->
 </div>
 
@@ -64,5 +82,9 @@
     grid-template-columns: auto auto auto auto auto auto;
     gap: 0px;
     padding: 30px;
+  }
+
+  .memo-button {
+    margin-top: -4px;
   }
 </style>
