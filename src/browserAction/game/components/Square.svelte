@@ -154,7 +154,7 @@
   }
 
   .row-line {
-    width: 16px;
+    width: 14px;
     height: 10px;
     border-top: 4px solid #d0e8e0;
     border-bottom: 4px solid #d0e8e0;
@@ -222,9 +222,8 @@
 
   /* TODO see if selected overlay can look better */
   .flip-box-selected {
-    outline: 6px solid #683028;
+    outline: 4px solid #683028;
     z-index: 3;
-    outline-offset: -2px;
   }
 
   /* This container is needed to position the front and back side */
