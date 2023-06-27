@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   import InfoSquare from "./InfoSquare.svelte";
   import Square from "./Square/Square.svelte";
 
@@ -21,7 +23,10 @@
    */
   export let explosionId;
 
-  let isMemoOpen = false;
+  /**
+   * @type {boolean} WHether or not in memo mode or not
+   */
+  export let isMemoOpen;
 
   $: board = game.board;
 
@@ -31,8 +36,13 @@
 
   $: selectedId = game.selectedId;
 
-  function toggleIsMemoOpen() {
-    isMemoOpen = !isMemoOpen;
+  const dispatch = createEventDispatcher();
+
+  /**
+   * Notifies the the parent so it can update the toggle in other children
+   */
+  function onToggleIsMemoOpen() {
+    dispatch("toggleMemoOpen");
   }
 
   function compareIds(a, b) {
@@ -79,7 +89,7 @@
     src={isMemoOpen ? "/icons/close_memo.png" : "/icons/open_memo.png"}
     draggable="false"
     class="memo-button"
-    on:click={toggleIsMemoOpen}
+    on:click={onToggleIsMemoOpen}
   />
 
   <!-- TODO add memo here -->
@@ -97,8 +107,9 @@
   }
 
   .memo-button {
-    margin-top: -2px;
-    width: 56px;
+    margin-top: -8px;
+    margin-left: -2px;
+    width: 60px;
     height: 64px;
   }
 </style>

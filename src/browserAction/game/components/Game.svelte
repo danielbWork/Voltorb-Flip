@@ -1,6 +1,7 @@
 <script>
   import { GameManager } from "../GameManager";
   import Board from "./Board.svelte";
+  import MemoDisplay from "./MemoDisplay.svelte";
   import ScoreDisplay from "./ScoreDisplay.svelte";
 
   let game = new GameManager();
@@ -10,6 +11,11 @@
   let explosionId = undefined;
 
   let midClick = false;
+
+  let isMemoOpen = false;
+
+  $: selectedSquareMemos =
+    game.board[game.selectedId.rowIndex][game.selectedId.colIndex].memos;
 
   /**
    * Utils function for async code to delay for a certain time
@@ -61,6 +67,7 @@
     }
 
     midClick = false;
+    isMemoOpen = false;
   }
 
   /**
@@ -68,7 +75,11 @@
    * @param event Clicking event used mainly for the id of the clicked square
    */
   async function handleHiddenClick(event) {
-    handleHiddenSquareFlip(event.detail.id);
+    if (!isMemoOpen) {
+      handleHiddenSquareFlip(event.detail.id);
+    } else {
+      game.selectedId = event.detail.id;
+    }
   }
 
   /**
@@ -125,6 +136,40 @@
   }
 
   /**
+   * Handles the user pressing one of the number keys and updates the selected square
+   * @param key The key the user pressed
+   */
+  function handleNumberKey(key) {
+    switch (key) {
+      case "`":
+      case "0":
+        selectedSquareMemos[0] = !selectedSquareMemos[0];
+        break;
+      case "1":
+        selectedSquareMemos[1] = !selectedSquareMemos[1];
+        break;
+      case "2":
+        selectedSquareMemos[2] = !selectedSquareMemos[2];
+        break;
+      case "3":
+        selectedSquareMemos[3] = !selectedSquareMemos[3];
+        break;
+
+      default:
+        break;
+    }
+
+    // Needed to refresh
+    game.board = game.board;
+  }
+
+  function handleToggleIsMemoOpen(event) {
+    isMemoOpen = !isMemoOpen;
+  }
+
+  // TODO Move all keyboard stuff somewhere else
+
+  /**
    * Handles user pressing a keyboard button and acts accordingly
    * @param event The keyboard event mainly used for the key value
    */
@@ -137,6 +182,10 @@
       return;
     }
 
+    if (key.match("\\d") || key.includes("`")) {
+      handleNumberKey(key);
+    }
+
     let { rowIndex, colIndex } = game.selectedId;
 
     if (key === " ") {
@@ -144,6 +193,18 @@
         handleHiddenSquareFlip(game.selectedId);
       }
     }
+
+    if (key === "x") {
+      isMemoOpen = !isMemoOpen;
+    }
+  }
+
+  /**
+   * Reacts to a user toggle a memo value
+   */
+  function handleOnMemoToggle() {
+    // Needed to refresh
+    game.board = game.board;
   }
 </script>
 
@@ -157,8 +218,16 @@
   {game}
   {explosionId}
   {finishedLevel}
+  {isMemoOpen}
+  on:toggleMemoOpen={handleToggleIsMemoOpen}
   on:hiddenClick={handleHiddenClick}
   on:revealClick={handleRevealClick}
+/>
+
+<MemoDisplay
+  {isMemoOpen}
+  memos={selectedSquareMemos}
+  on:memoToggled={handleOnMemoToggle}
 />
 
 <svelte:window on:keydown|preventDefault={handleOnKeydown} />
