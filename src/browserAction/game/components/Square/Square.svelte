@@ -10,7 +10,7 @@
   /**
    * @type {boolean} Whether or not the square should display it's value or not
    */
-  export let isHidden; //TODO see how should update
+  export let isHidden;
 
   /**
    * @type The id of the square to notify events
@@ -139,7 +139,7 @@
     z-index: 1;
   }
 
-  /* TODO see if selected overlay can look better */
+  /* TODO see if selected overlay can look better/ fix the stupid lines not being equal */
   .flip-box-selected {
     outline: 4px solid #683028;
     z-index: 3;

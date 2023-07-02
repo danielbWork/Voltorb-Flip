@@ -11,7 +11,7 @@
    */
   export let game;
 
-  // TODO see if this two should be in game manager
+  // TODO Move to game manager (probably after changing it to store)
 
   /**
    * @type {boolean} Whether or not we finished the current level or not so we can display all hidden squares
@@ -24,7 +24,7 @@
   export let explosionId;
 
   /**
-   * @type {boolean} WHether or not in memo mode or not
+   * @type {boolean} Whether or not in memo mode or not
    */
   export let isMemoOpen;
 
@@ -82,7 +82,6 @@
     <InfoSquare {sum} {voltorbCount} color={infoColors[index]} />
   {/each}
 
-  <!-- TODO add animation for open close and onkeydown -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <img
     alt="memo"
@@ -91,8 +90,6 @@
     class="memo-button"
     on:click={onToggleIsMemoOpen}
   />
-
-  <!-- TODO add memo here -->
 </div>
 
 <!-- TODO find why padding is needed here -->

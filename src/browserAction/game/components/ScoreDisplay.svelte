@@ -23,7 +23,6 @@
   <span>Level: {level + 1}</span>
   <span>Level Score: {currentScoreText}</span>
   <span>Total Score: {totalScoreText}</span>
-  <!-- TODO decide on showing highest score -->
 </div>
 
 <style>

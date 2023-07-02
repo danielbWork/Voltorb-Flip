@@ -1,6 +1,4 @@
 <script>
-  import { prevent_default } from "svelte/internal";
-
   /**
    * @param {number} sum The sum of values of the row/column, 0 if only voltorbs
    */
@@ -8,7 +6,7 @@
   /**
    * @param {number} voltorbCount The number of voltorbs in the row/column
    */
-  export let voltorbCount; //TODO see how should update
+  export let voltorbCount;
 
   /**
    * @param {string} color The color hex for the info square background
@@ -16,7 +14,7 @@
   export let color;
 </script>
 
-<!-- TODO update the ui here to match game -->
+<!-- TODO update the ui here to match game specifically text font and voltorb image-->
 
 <div class="grid-container" style="background-color: {color};">
   <span class="sum-item">

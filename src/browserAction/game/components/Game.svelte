@@ -25,8 +25,6 @@
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  // TODO decide if this best way to handle this
-
   /**
    * Handles user "flipping" a hidden square open ant reacts accordingly
    * @param id The id of the square that was pressed
@@ -223,6 +221,8 @@
   on:hiddenClick={handleHiddenClick}
   on:revealClick={handleRevealClick}
 />
+
+<!-- TODO add settings and about page -->
 
 <MemoDisplay
   {isMemoOpen}

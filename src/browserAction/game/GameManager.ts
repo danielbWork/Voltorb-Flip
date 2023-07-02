@@ -57,7 +57,7 @@ export class GameManager {
    */
   updateLevel(wasSuccessful: boolean) {
     if (wasSuccessful) {
-      // TODO maybe add something for first time bitting level 8
+      // TODO Unlock shiny bell charm after first beating of level 8
 
       // 7 since we have 8 difficulty levels and starts at 0
       this.updateToLevel(Math.min(this.level + 1, 7));
@@ -166,8 +166,6 @@ export class GameManager {
    * Calculates the sums of the rows and columns on the board
    */
   private calculateLineSums() {
-    //TODO check if better to have the calculation for both happen at the same time
-
     // Calculates the rows
     this.rowSums = this.board.map((row) => {
       let sums = { sum: 0, voltorbCount: 0 };

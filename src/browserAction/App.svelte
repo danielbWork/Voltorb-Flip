@@ -7,7 +7,6 @@
 </div>
 
 <style>
-  /* TODO update background from just pure color */
   div {
     height: 600px;
     width: 500px;
