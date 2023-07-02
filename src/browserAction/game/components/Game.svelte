@@ -1,25 +1,23 @@
 <script>
   import { GameManager } from "../GameManager";
+  import { hasFinishedLevel } from "../stores";
   import Board from "./Board.svelte";
   import MemoDisplay from "./MemoDisplay.svelte";
   import ScoreDisplay from "./ScoreDisplay.svelte";
+  import { isMemoOpen, selectedId } from "../stores";
 
   let game = new GameManager();
 
-  let finishedLevel = false;
-
+  // TODO maybe make to a store also see if this should just be boolean since it should match selected id
   let explosionId = undefined;
 
   let midClick = false;
 
-  let isMemoOpen = false;
-
-  $: selectedSquareMemos =
-    game.board[game.selectedId.rowIndex][game.selectedId.colIndex].memos;
+  $: selectedSquareMemos = game.board[$selectedId.row][$selectedId.col].memos;
 
   /**
    * Utils function for async code to delay for a certain time
-   * @param ms How long we need to wait
+   * @param {number} ms How long we need to wait
    */
   async function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -27,18 +25,16 @@
 
   /**
    * Handles user "flipping" a hidden square open ant reacts accordingly
-   * @param id The id of the square that was pressed
+   * @param {import ("../types").SquareId} id The id of the square that was pressed
    */
   async function handleHiddenSquareFlip(id) {
     if (midClick) return;
 
     midClick = true;
 
-    const { rowIndex, colIndex } = id;
+    $selectedId = id;
 
-    game.selectedId = id;
-
-    const levelEnded = game.selectSquare(rowIndex, colIndex);
+    const levelEnded = game.selectSquare(id);
     game = game;
 
     if (levelEnded !== undefined) {
@@ -50,7 +46,7 @@
         await delay(700);
       }
       explosionId = undefined;
-      finishedLevel = true;
+      $hasFinishedLevel = true;
 
       // Other squares update
       await delay(100);
@@ -60,12 +56,12 @@
       game.updateLevel(levelEnded);
 
       await delay(50);
-      finishedLevel = false;
+      $hasFinishedLevel = false;
       game = game;
     }
 
     midClick = false;
-    isMemoOpen = false;
+    $isMemoOpen = false;
   }
 
   /**
@@ -73,10 +69,10 @@
    * @param event Clicking event used mainly for the id of the clicked square
    */
   async function handleHiddenClick(event) {
-    if (!isMemoOpen) {
+    if (!$isMemoOpen) {
       handleHiddenSquareFlip(event.detail.id);
     } else {
-      game.selectedId = event.detail.id;
+      $selectedId = event.detail.id;
     }
   }
 
@@ -89,7 +85,7 @@
 
     midClick = true;
 
-    game.selectedId = event.detail.id;
+    $selectedId = event.detail.id;
 
     midClick = false;
   }
@@ -99,30 +95,30 @@
    * @param key The key the user pressed
    */
   function handleArrowClick(key) {
-    let { rowIndex, colIndex } = game.selectedId;
+    let { row, col } = $selectedId;
     switch (key) {
       case "ArrowUp":
-        rowIndex--;
+        row--;
 
-        if (rowIndex < 0) rowIndex = 4;
+        if (row < 0) row = 4;
 
         break;
       case "ArrowDown":
-        rowIndex++;
+        row++;
 
-        if (rowIndex > 4) rowIndex = 0;
+        if (row > 4) row = 0;
 
         break;
       case "ArrowLeft":
-        colIndex--;
+        col--;
 
-        if (colIndex < 0) colIndex = 4;
+        if (col < 0) col = 4;
 
         break;
       case "ArrowRight":
-        colIndex++;
+        col++;
 
-        if (colIndex > 4) colIndex = 0;
+        if (col > 4) col = 0;
 
         break;
 
@@ -130,7 +126,7 @@
         break;
     }
 
-    game.selectedId = { rowIndex, colIndex };
+    $selectedId = { row, col };
   }
 
   /**
@@ -161,10 +157,6 @@
     game.board = game.board;
   }
 
-  function handleToggleIsMemoOpen(event) {
-    isMemoOpen = !isMemoOpen;
-  }
-
   // TODO Move all keyboard stuff somewhere else
 
   /**
@@ -184,16 +176,14 @@
       handleNumberKey(key);
     }
 
-    let { rowIndex, colIndex } = game.selectedId;
-
     if (key === " ") {
-      if (game.board[rowIndex][colIndex].isHidden) {
-        handleHiddenSquareFlip(game.selectedId);
+      if (game.board[$selectedId.row][$selectedId.col].isHidden) {
+        handleHiddenSquareFlip($selectedId);
       }
     }
 
     if (key === "x") {
-      isMemoOpen = !isMemoOpen;
+      $isMemoOpen = !$isMemoOpen;
     }
   }
 
@@ -215,19 +205,12 @@
 <Board
   {game}
   {explosionId}
-  {finishedLevel}
-  {isMemoOpen}
-  on:toggleMemoOpen={handleToggleIsMemoOpen}
   on:hiddenClick={handleHiddenClick}
   on:revealClick={handleRevealClick}
 />
 
 <!-- TODO add settings and about page -->
 
-<MemoDisplay
-  {isMemoOpen}
-  memos={selectedSquareMemos}
-  on:memoToggled={handleOnMemoToggle}
-/>
+<MemoDisplay memos={selectedSquareMemos} on:memoToggled={handleOnMemoToggle} />
 
 <svelte:window on:keydown|preventDefault={handleOnKeydown} />

@@ -1,6 +1,5 @@
 import { getLevelInfo } from "./LevelInfo";
-import { BoardSquare, LineSum } from "./types";
-// TODO see if this should be store
+import { BoardSquare, LineSum, SquareId } from "./types";
 /**
  * Manages the game state and board
  */
@@ -16,7 +15,7 @@ export class GameManager {
   totalScore = 0;
 
   /**
-   * THe current score of the current game
+   * The current score of the current game
    */
   currentScore = 0;
 
@@ -43,8 +42,6 @@ export class GameManager {
    * The sums of values and voltorbs in each column
    */
   colSums: LineSum[] = [];
-
-  selectedId = { rowIndex: 0, colIndex: 0 };
 
   constructor() {
     this.updateToLevel(0);
@@ -89,8 +86,8 @@ export class GameManager {
    * @returns undefined if voltorb wasn't selected or there are still 2 and or
    * 3s to find otherwise returns a boolean if was successful or not
    */
-  selectSquare(row: number, col: number): any {
-    const square = this.board[row][col];
+  selectSquare(id: SquareId): boolean | undefined {
+    const square = this.board[id.row][id.col];
     square.isHidden = false;
 
     if (square.value > 0) {

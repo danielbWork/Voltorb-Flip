@@ -2,16 +2,14 @@
   import { createEventDispatcher } from "svelte";
   import SquareMemo from "./SquareMemo.svelte";
   import RevealedSquareImage from "./RevealedSquareImages.svelte";
+  import { hasFinishedLevel, isMemoOpen } from "../../stores";
 
   /**
-   * @type {number} The value of the square of 0 or -1 is a voltorb
+   * @type {import ("../../types.js").BoardSquare} The Square this represents
    */
-  export let value;
-  /**
-   * @type {boolean} Whether or not the square should display it's value or not
-   */
-  export let isHidden;
+  export let square;
 
+  // TODO update ids to have type (row, col)
   /**
    * @type The id of the square to notify events
    */
@@ -37,16 +35,6 @@
    */
   export let selected;
 
-  /**
-   * @type {boolean[]} Marks the memos to display
-   */
-  export let memos;
-
-  /**
-   * @type {boolean} Marks if we need to enable memo mode based ui
-   */
-  export let isMemoOpen;
-
   const dispatch = createEventDispatcher();
 
   function onHiddenClick() {
@@ -64,13 +52,13 @@
   <div
     class="flip-box"
     class:flip-box-selected={selected}
-    class:flip-box-selected-memo={selected && isMemoOpen}
+    class:flip-box-selected-memo={selected && $isMemoOpen}
   >
     <div
       class="flip-box-inner"
-      class:flip-it={!isHidden}
+      class:flip-it={!square.isHidden || $hasFinishedLevel}
       class:flip-box-inner-selected={selected}
-      class:flip-box-inner-selected-memo={selected && isMemoOpen}
+      class:flip-box-inner-selected-memo={selected && $isMemoOpen}
     >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="flip-box-front" on:click={onHiddenClick}>
@@ -82,12 +70,15 @@
           draggable="false"
         />
 
-        <SquareMemo {memos} displayPencil={isMemoOpen && selected} />
+        <SquareMemo
+          memos={square.memos}
+          displayPencil={$isMemoOpen && selected}
+        />
       </div>
 
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="flip-box-back" on:click={onRevealClick}>
-        <RevealedSquareImage {value} {hasExploded} />
+        <RevealedSquareImage value={square.value} {hasExploded} />
       </div>
     </div>
   </div>

@@ -14,3 +14,11 @@ export type LineSum = {
   sum: number;
   voltorbCount: number;
 };
+
+/**
+ * And id marking the placement of square on the board
+ */
+export type SquareId = {
+  row: number;
+  col: number;
+};

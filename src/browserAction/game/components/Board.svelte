@@ -1,80 +1,49 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-
   import InfoSquare from "./InfoSquare.svelte";
   import Square from "./Square/Square.svelte";
+  import { isMemoOpen, selectedId } from "../stores";
 
   const infoColors = ["#e07050", "#40a840", "#e8a038", "#3090f8", "#c060e0"];
 
   /**
-   * @type {import ("../GameManager.js").GameManager} The game manger we get the info from
+   * @type {import ("../GameManager").GameManager} The game manger we get the info from
    */
   export let game;
 
   // TODO Move to game manager (probably after changing it to store)
 
   /**
-   * @type {boolean} Whether or not we finished the current level or not so we can display all hidden squares
-   */
-  export let finishedLevel;
-
-  /**
-   * @type {{rowIndex:number colIndex:number}} The id of the selected voltorb that should explode
+   * @type {import ("../types").SquareId} The id of the selected voltorb that should explode
    */
   export let explosionId;
-
-  /**
-   * @type {boolean} Whether or not in memo mode or not
-   */
-  export let isMemoOpen;
 
   $: board = game.board;
 
   $: rowSums = game.rowSums;
 
   $: colSums = game.colSums;
-
-  $: selectedId = game.selectedId;
-
-  const dispatch = createEventDispatcher();
-
-  /**
-   * Notifies the the parent so it can update the toggle in other children
-   */
-  function onToggleIsMemoOpen() {
-    dispatch("toggleMemoOpen");
-  }
-
-  function compareIds(a, b) {
-    return (
-      a === b || (a?.rowIndex === b?.rowIndex && a?.colIndex === b?.colIndex)
-    );
-  }
 </script>
 
 <!-- TODO Check first explosion being weird -->
 <div class="grid-container">
-  {#each board as row, rowIndex}
-    {#each row as square, colIndex}
+  {#each board as squaresRow, row}
+    {#each squaresRow as square, col}
       <Square
-        id={{ rowIndex, colIndex }}
-        value={square.value}
-        isHidden={square.isHidden && !finishedLevel}
-        rowGapColor={infoColors[rowIndex]}
-        colGapColor={infoColors[colIndex]}
-        hasExploded={compareIds(explosionId, { rowIndex, colIndex })}
-        selected={compareIds(selectedId, { rowIndex, colIndex })}
-        memos={square.memos}
-        {isMemoOpen}
+        {square}
+        id={{ row, col }}
+        rowGapColor={infoColors[row]}
+        colGapColor={infoColors[col]}
+        hasExploded={explosionId?.row === row && explosionId?.col === col}
+        selected={$selectedId.row === row && $selectedId.col === col}
         on:hiddenClick
         on:revealClick
       />
     {/each}
 
     <InfoSquare
-      sum={rowSums[rowIndex].sum}
-      voltorbCount={rowSums[rowIndex].voltorbCount}
-      color={infoColors[rowIndex]}
+      sum={rowSums[row].sum}
+      voltorbCount={rowSums[row].voltorbCount}
+      color={infoColors[row]}
     />
   {/each}
 
@@ -85,10 +54,12 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <img
     alt="memo"
-    src={isMemoOpen ? "/icons/close_memo.png" : "/icons/open_memo.png"}
+    src={$isMemoOpen ? "/icons/close_memo.png" : "/icons/open_memo.png"}
     draggable="false"
     class="memo-button"
-    on:click={onToggleIsMemoOpen}
+    on:click={() => {
+      $isMemoOpen = !$isMemoOpen;
+    }}
   />
 </div>
 

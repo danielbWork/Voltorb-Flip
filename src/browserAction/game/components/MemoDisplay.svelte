@@ -1,11 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
+  import { isMemoOpen } from "../stores";
 
-  /**
-   * @type {boolean} Whether or not the buttons should be displayed or not
-   */
-  export let isMemoOpen;
+  // TODO make revealed squares to have all hidden memos
 
   /**
    * @type {boolean[]} The selected memos of the selected block
@@ -37,7 +35,7 @@
   // const
 </script>
 
-{#if isMemoOpen}
+{#if $isMemoOpen}
   <div class="container" transition:fly={{ x: 50, duration: 500 }}>
     {#each memos as memo, index}
       <input
