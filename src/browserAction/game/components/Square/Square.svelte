@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import SquareMemo from "./SquareMemo.svelte";
   import RevealedSquareImage from "./RevealedSquareImages.svelte";
-  import { hasFinishedLevel, isMemoOpen } from "../../stores";
+  import { hasFinishedLevel, isExploding, isMemoOpen } from "../../stores";
 
   /**
    * @type {import ("../../types.js").BoardSquare} The Square this represents
@@ -24,11 +24,6 @@
    * @type {number} The color used for the line between this square and the one below it
    */
   export let colGapColor;
-
-  /**
-   * @type {boolean} Whether or not the explosion animation should be displayed here
-   */
-  export let hasExploded;
 
   /**
    * @type {boolean} Marks this square as the last one selected by the user
@@ -78,7 +73,10 @@
 
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="flip-box-back" on:click={onRevealClick}>
-        <RevealedSquareImage value={square.value} {hasExploded} />
+        <RevealedSquareImage
+          value={square.value}
+          hasExploded={selected && $isExploding}
+        />
       </div>
     </div>
   </div>

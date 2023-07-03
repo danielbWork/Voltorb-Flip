@@ -15,3 +15,8 @@ export const isMemoOpen = writable(false);
  * The id of the selected square
  */
 export const selectedId = writable<SquareId>({ row: 0, col: 0 });
+
+/**
+ * Flag for notifying that user selected a voltorb, mostly used for explosion animation
+ */
+export const isExploding = writable(false);

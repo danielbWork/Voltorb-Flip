@@ -10,13 +10,6 @@
    */
   export let game;
 
-  // TODO Move to game manager (probably after changing it to store)
-
-  /**
-   * @type {import ("../types").SquareId} The id of the selected voltorb that should explode
-   */
-  export let explosionId;
-
   $: board = game.board;
 
   $: rowSums = game.rowSums;
@@ -33,7 +26,6 @@
         id={{ row, col }}
         rowGapColor={infoColors[row]}
         colGapColor={infoColors[col]}
-        hasExploded={explosionId?.row === row && explosionId?.col === col}
         selected={$selectedId.row === row && $selectedId.col === col}
         on:hiddenClick
         on:revealClick

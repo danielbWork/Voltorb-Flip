@@ -1,15 +1,12 @@
 <script>
   import { GameManager } from "../GameManager";
-  import { hasFinishedLevel } from "../stores";
+  import { hasFinishedLevel, isExploding } from "../stores";
   import Board from "./Board.svelte";
   import MemoDisplay from "./MemoDisplay.svelte";
   import ScoreDisplay from "./ScoreDisplay.svelte";
   import { isMemoOpen, selectedId } from "../stores";
 
   let game = new GameManager();
-
-  // TODO maybe make to a store also see if this should just be boolean since it should match selected id
-  let explosionId = undefined;
 
   let midClick = false;
 
@@ -42,10 +39,10 @@
       await delay(300);
 
       if (!levelEnded) {
-        explosionId = id;
+        $isExploding = true;
         await delay(700);
       }
-      explosionId = undefined;
+      $isExploding = false;
       $hasFinishedLevel = true;
 
       // Other squares update
@@ -164,6 +161,8 @@
    * @param event The keyboard event mainly used for the key value
    */
   function handleOnKeydown(event) {
+    if (midClick) return;
+
     key = event.key;
     // TODO maybe enable keybind selection
 
@@ -204,7 +203,6 @@
 
 <Board
   {game}
-  {explosionId}
   on:hiddenClick={handleHiddenClick}
   on:revealClick={handleRevealClick}
 />
