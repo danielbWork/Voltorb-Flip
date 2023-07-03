@@ -1,22 +1,17 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
-  import { isMemoOpen } from "../stores";
+  import { isMemoOpen, game, selectedSquare } from "../stores";
 
-  // TODO make revealed squares to have all hidden memos
-
-  /**
-   * @type {boolean[]} The selected memos of the selected block
-   */
-  export let memos;
-
-  const dispatch = createEventDispatcher();
+  $: memos = $selectedSquare.isHidden
+    ? $selectedSquare.memos
+    : [false, false, false, false];
 
   /**
    * Notifies parent that a memo was toggled
    */
   function onToggleMemo() {
-    dispatch("memoToggled");
+    // Needed to refresh the ui sadly
+    $game.board = $game.board;
   }
 
   const checkedImages = [

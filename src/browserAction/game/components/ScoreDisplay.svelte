@@ -1,26 +1,13 @@
 <script>
-  /**
-   * @param {number} level The level the game is in
-   */
-  export let level;
+  import { game } from "../stores";
 
-  /**
-   * @param {number} currentScore The score for the current level
-   */
-  export let currentScore;
-
-  /**
-   * @param {number} totalScore The total score of the game
-   */
-  export let totalScore;
-
-  $: currentScoreText = `${currentScore}`.padStart(4, "0");
-  $: totalScoreText = `${totalScore}`.padStart(5, "0");
+  $: currentScoreText = `${$game.currentScore}`.padStart(4, "0");
+  $: totalScoreText = `${$game.totalScore}`.padStart(5, "0");
 </script>
 
 <div class="container">
   <!-- Adds plus one since level 0 is weird -->
-  <span>Level: {level + 1}</span>
+  <span>Level: {$game.level + 1}</span>
   <span>Level Score: {currentScoreText}</span>
   <span>Total Score: {totalScoreText}</span>
 </div>

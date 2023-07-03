@@ -1,20 +1,15 @@
 <script>
   import InfoSquare from "./InfoSquare.svelte";
   import Square from "./Square/Square.svelte";
-  import { isMemoOpen, selectedId } from "../stores";
+  import { isMemoOpen, selectedId, game } from "../stores";
 
   const infoColors = ["#e07050", "#40a840", "#e8a038", "#3090f8", "#c060e0"];
 
-  /**
-   * @type {import ("../GameManager").GameManager} The game manger we get the info from
-   */
-  export let game;
+  $: board = $game.board;
 
-  $: board = game.board;
+  $: rowSums = $game.rowSums;
 
-  $: rowSums = game.rowSums;
-
-  $: colSums = game.colSums;
+  $: colSums = $game.colSums;
 </script>
 
 <!-- TODO Check first explosion being weird -->
