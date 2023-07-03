@@ -22,12 +22,12 @@
     key = event.key;
     // TODO  enable keybind selection
     // TODO update this to match settings code
-    if (key.includes("Arrow")) {
+    if (Object.values(keybindings.movement).includes(key)) {
       handleArrowClick(key);
       return;
     }
 
-    if (key.match("\\d") || key.includes("`")) {
+    if (keybindings.memos.includes(key)) {
       handleNumberKey(key);
     }
 
@@ -53,26 +53,29 @@
    */
   function handleArrowClick(key) {
     let { row, col } = $selectedId;
+
+    const keybindings = settings.keybindings.movement;
+
     switch (key) {
-      case "ArrowUp":
+      case keybindings.up:
         row--;
 
         if (row < 0) row = 4;
 
         break;
-      case "ArrowDown":
+      case keybindings.down:
         row++;
 
         if (row > 4) row = 0;
 
         break;
-      case "ArrowLeft":
+      case keybindings.left:
         col--;
 
         if (col < 0) col = 4;
 
         break;
-      case "ArrowRight":
+      case keybindings.right:
         col++;
 
         if (col > 4) col = 0;
@@ -92,25 +95,9 @@
    */
   function handleNumberKey(key) {
     const memos = $selectedSquare.memos;
+    const keybindings = settings.keybindings.memos;
 
-    switch (key) {
-      case "`":
-      case "0":
-        memos[0] = !memos[0];
-        break;
-      case "1":
-        memos[1] = !memos[1];
-        break;
-      case "2":
-        memos[2] = !memos[2];
-        break;
-      case "3":
-        memos[3] = !memos[3];
-        break;
-
-      default:
-        break;
-    }
+    memos[keybindings.indexOf(key)] = !memos[keybindings.indexOf(key)];
 
     // Needed to refresh
     $game.board = $game.board;
