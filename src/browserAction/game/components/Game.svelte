@@ -11,6 +11,7 @@
   let isMidClick = false;
 
   let modal;
+  // TODO update text to match actual game and how ti updates
   let modalText = "";
   /**
    * Utils function for async code to delay for a certain time
@@ -111,7 +112,7 @@
   }}
 />
 <!-- TODO fix text font -->
-<Modal bind:this={modal}>
+<Modal bind:this={modal} displayAtBottom>
   <span class="dialog-text">{modalText}</span>
 </Modal>
 

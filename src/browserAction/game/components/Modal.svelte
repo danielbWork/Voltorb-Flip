@@ -5,6 +5,11 @@
   let dialogRef;
 
   /**
+   * flag if dialog should be displayed at bottom of screen
+   */
+  export let displayAtBottom = false;
+
+  /**
    * Opens the dialog to be displayed
    */
   export function show() {
@@ -33,7 +38,11 @@
 />
 <!-- TODO add custom fonts -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<dialog bind:this={dialogRef} on:click={hide}>
+<dialog
+  bind:this={dialogRef}
+  on:click={hide}
+  class:bottom-display={displayAtBottom}
+>
   <div class="container">
     <div class="dialog-content">
       <slot />
@@ -55,6 +64,10 @@
     padding-right: 2px;
   }
 
+  .bottom-display {
+    margin-bottom: 50px;
+  }
+
   .container {
     display: flex;
   }
@@ -66,7 +79,6 @@
     padding: 4px;
     margin-right: 10px;
   }
-
   img {
     width: 20px;
     height: 25px;
