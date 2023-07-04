@@ -21,7 +21,6 @@
 
     key = event.key;
     // TODO  enable keybind selection
-    // TODO update this to match settings code
     if (Object.values(keybindings.movement).includes(key)) {
       handleArrowClick(key);
       return;

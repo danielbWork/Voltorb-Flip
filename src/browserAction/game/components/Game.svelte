@@ -4,10 +4,14 @@
   import MemoDisplay from "./MemoDisplay.svelte";
   import ScoreDisplay from "./ScoreDisplay.svelte";
   import { isMemoOpen, selectedId, game } from "../stores";
+
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
+  import Modal from "./Modal.svelte";
 
   let isMidClick = false;
 
+  let modal;
+  let modalText = "";
   /**
    * Utils function for async code to delay for a certain time
    * @param {number} ms How long we need to wait
@@ -44,13 +48,21 @@
       // Other squares update
       await delay(100);
 
-      // TODO make alert look better
-      alert(levelEnded ? "Game clear!" : "Oh no! You get 0 Coins!");
+      modalText = levelEnded ? "Game clear!" : "Oh no! You get 0 Coins!";
+
+      modal.show();
+
+      // waits until the dialog is closed
+      while (modal.isOpen()) {
+        await delay(100);
+      }
+
       $game.updateLevel(levelEnded);
 
       await delay(50);
       $hasFinishedLevel = false;
       $game = $game;
+      $selectedId = { row: 0, col: 0 };
     }
 
     isMidClick = false;
@@ -98,3 +110,17 @@
     handleHiddenSquareFlip($selectedId);
   }}
 />
+<!-- TODO fix text font -->
+<Modal bind:this={modal}>
+  <span class="dialog-text">{modalText}</span>
+</Modal>
+
+<style>
+  .dialog-text {
+    width: 400px;
+    height: 70px;
+    display: block;
+    color: #505058;
+    text-shadow: 1px 1px #a0a0a8;
+  }
+</style>
