@@ -4,14 +4,11 @@
   import RevealedSquareImage from "./RevealedSquareImages.svelte";
   import { hasFinishedLevel, isExploding, isMemoOpen } from "../../stores";
 
-  // TODO decide if should add slots for ui in this and info squares
-
   /**
    * @type {import ("../../types.js").BoardSquare} The Square this represents
    */
   export let square;
 
-  // TODO update ids to have type (row, col)
   /**
    * @type The id of the square to notify events
    */
