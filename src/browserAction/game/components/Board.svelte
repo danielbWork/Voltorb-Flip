@@ -12,7 +12,6 @@
   $: colSums = $game.colSums;
 </script>
 
-<!-- TODO Check first explosion being weird -->
 <div class="grid-container">
   {#each board as squaresRow, row}
     {#each squaresRow as square, col}
@@ -50,7 +49,6 @@
   />
 </div>
 
-<!-- TODO find why padding is needed here -->
 <style>
   .grid-container {
     user-select: none;

@@ -13,20 +13,21 @@
 <!-- TODO maybe choose better images -->
 {#if value === -1}
   <div class="voltorb-parent">
-    <img
-      class="square-image"
-      alt="-1"
-      src="/icons/shiny_voltorb.png"
-      draggable="false"
-    />
     {#if hasExploded}
       <img
         alt="0"
         src="/icons/explosion.gif"
         draggable="false"
         class="explosion"
+        loading="lazy"
       />
     {/if}
+    <img
+      class="square-image"
+      alt="-1"
+      src="/icons/shiny_voltorb.png"
+      draggable="false"
+    />
   </div>
 {:else if value === 0}
   <div class="voltorb-parent">
@@ -36,6 +37,7 @@
         src="/icons/explosion.gif"
         draggable="false"
         class="explosion"
+        loading="lazy"
       />
     {/if}
     <img

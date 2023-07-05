@@ -43,7 +43,7 @@
 
       if (!levelEnded) {
         $isExploding = true;
-        await delay(700);
+        await delay(1000);
       }
       $isExploding = false;
 
@@ -61,11 +61,11 @@
       $hasFinishedLevel = true;
 
       // Other squares update
-      await delay(700);
+      await delay(600);
 
       $game.updateLevel(levelEnded);
 
-      await delay(300);
+      await delay(200);
       $hasFinishedLevel = false;
 
       $game = $game;
