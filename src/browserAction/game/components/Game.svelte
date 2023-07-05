@@ -1,12 +1,12 @@
 <script>
-  import { hasFinishedLevel, isExploding } from "../stores";
+  import { hasFinishedLevel, isExploding, selectedSquare } from "../stores";
   import Board from "./Board.svelte";
   import MemoDisplay from "./MemoDisplay.svelte";
   import ScoreDisplay from "./ScoreDisplay.svelte";
   import { isMemoOpen, selectedId, game } from "../stores";
 
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
-  import Modal from "./Modal.svelte";
+  import GameModal from "./GameModal.svelte";
 
   let isMidClick = false;
 
@@ -35,6 +35,8 @@
     const levelEnded = $game.selectSquare(id);
     $game = $game;
 
+    console.log($selectedSquare);
+
     if (levelEnded !== undefined) {
       // First square
       await delay(300);
@@ -44,24 +46,28 @@
         await delay(700);
       }
       $isExploding = false;
-      $hasFinishedLevel = true;
 
-      // Other squares update
-      await delay(100);
+      modalText = levelEnded
+        ? `Game clear!\nYou received ${$game.currentScore} Coin(s)!`
+        : "Oh no! You get 0 Coins!";
 
-      modalText = levelEnded ? "Game clear!" : "Oh no! You get 0 Coins!";
-
-      modal.show();
+      modal.show(true);
 
       // waits until the dialog is closed
       while (modal.isOpen()) {
         await delay(100);
       }
 
+      $hasFinishedLevel = true;
+
+      // Other squares update
+      await delay(700);
+
       $game.updateLevel(levelEnded);
 
-      await delay(50);
+      await delay(300);
       $hasFinishedLevel = false;
+
       $game = $game;
       $selectedId = { row: 0, col: 0 };
     }
@@ -112,16 +118,4 @@
   }}
 />
 <!-- TODO fix text font -->
-<Modal bind:this={modal} displayAtBottom>
-  <span class="dialog-text">{modalText}</span>
-</Modal>
-
-<style>
-  .dialog-text {
-    width: 400px;
-    height: 70px;
-    display: block;
-    color: #505058;
-    text-shadow: 1px 1px #a0a0a8;
-  }
-</style>
+<GameModal bind:this={modal} text={modalText} />

@@ -5,9 +5,9 @@
   let dialogRef;
 
   /**
-   * flag if dialog should be displayed at bottom of screen
+   * The text displayed in the dialog
    */
-  export let displayAtBottom = false;
+  export let text = "";
 
   /**
    * Opens the dialog to be displayed
@@ -38,17 +38,11 @@
 />
 <!-- TODO add custom fonts -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<dialog
-  bind:this={dialogRef}
-  on:click={hide}
-  class:bottom-display={displayAtBottom}
->
+<dialog bind:this={dialogRef} on:click={hide}>
   <div class="container">
     <div class="dialog-content">
-      <slot />
+      <textarea readonly class="dialog-text" value={text} />
     </div>
-
-    <img src="/icons/dialog_arrow.png" alt="arrow" />
   </div>
 </dialog>
 
@@ -62,9 +56,7 @@
     padding-bottom: 4px;
     padding-left: 8px;
     padding-right: 2px;
-  }
 
-  .bottom-display {
     margin-bottom: 50px;
   }
 
@@ -76,12 +68,21 @@
     background-color: #f8f8f8;
     border: 1px solid #f8f8f8;
     border-radius: 2px;
-    padding: 4px;
     margin-right: 10px;
   }
-  img {
-    width: 20px;
-    height: 25px;
-    margin-top: 50px;
+
+  .dialog-text {
+    width: 400px;
+    height: 70px;
+    display: block;
+    appearance: none;
+    color: #505058;
+    text-shadow: 1px 1px #a0a0a8;
+    background-color: #f8f8f8;
+    font-size: 20px;
+    border: 0px;
+    outline: 0px;
+    resize: none;
+    line-height: 1.6;
   }
 </style>
