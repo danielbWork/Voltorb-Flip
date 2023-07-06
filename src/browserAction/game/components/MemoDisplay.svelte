@@ -37,7 +37,7 @@
         type="checkbox"
         bind:checked={memo}
         on:change={onToggleMemo}
-        style={`background-image: url("/icons/${
+        style={`background-image: url("/assets/icons/${
           memo ? checkedImages[index] : uncheckedImages[index]
         }.png");`}
       />

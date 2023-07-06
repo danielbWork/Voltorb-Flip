@@ -40,7 +40,9 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <img
     alt="memo"
-    src={$isMemoOpen ? "/icons/close_memo.png" : "/icons/open_memo.png"}
+    src={$isMemoOpen
+      ? "/assets/icons/close_memo.png"
+      : "/assets/icons/open_memo.png"}
     draggable="false"
     class="memo-button"
     on:click={() => {

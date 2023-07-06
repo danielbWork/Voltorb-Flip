@@ -13,7 +13,7 @@
   {#if memos[0]}
     <img
       alt="0"
-      src="/icons/memo_0.svg"
+      src="/assets/icons/memo_0.svg"
       draggable="false"
       class="memo-image"
       style=" top: 0;
@@ -24,7 +24,7 @@
   {#if memos[1]}
     <img
       alt="1"
-      src="/icons/memo_1.svg"
+      src="/assets/icons/memo_1.svg"
       draggable="false"
       class="memo-image"
       style=" top: 0;
@@ -35,7 +35,7 @@
   {#if memos[2]}
     <img
       alt="2"
-      src="/icons/memo_2.svg"
+      src="/assets/icons/memo_2.svg"
       draggable="false"
       class="memo-image"
       style=" bottom: 0;
@@ -46,7 +46,7 @@
   {#if memos[3]}
     <img
       alt="3"
-      src="/icons/memo_3.svg"
+      src="/assets/icons/memo_3.svg"
       draggable="false"
       class="memo-image"
       style=" bottom: 0;
@@ -57,7 +57,7 @@
   {#if displayPencil}
     <img
       alt="pencil"
-      src="/icons/memo_pencil.png"
+      src="/assets/icons/memo_pencil.png"
       draggable="false"
       class="memo-pencil"
     />

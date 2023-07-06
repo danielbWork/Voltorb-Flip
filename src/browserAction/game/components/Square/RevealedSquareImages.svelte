@@ -16,7 +16,7 @@
     {#if hasExploded}
       <img
         alt="0"
-        src="/icons/explosion.gif"
+        src="/assets/icons/explosion.gif"
         draggable="false"
         class="explosion"
         loading="lazy"
@@ -25,7 +25,7 @@
     <img
       class="square-image"
       alt="-1"
-      src="/icons/shiny_voltorb.png"
+      src="/assets/icons/shiny_voltorb.png"
       draggable="false"
     />
   </div>
@@ -34,7 +34,7 @@
     {#if hasExploded}
       <img
         alt="0"
-        src="/icons/explosion.gif"
+        src="/assets/icons/explosion.gif"
         draggable="false"
         class="explosion"
         loading="lazy"
@@ -43,7 +43,7 @@
     <img
       class="square-image"
       alt="0"
-      src="/icons/voltorb.png"
+      src="/assets/icons/voltorb.png"
       draggable="false"
     />
   </div>
@@ -51,21 +51,21 @@
   <img
     class="square-image"
     alt="1"
-    src="/icons/square_1.png"
+    src="/assets/icons/square_1.png"
     draggable="false"
   />
 {:else if value === 2}
   <img
     class="square-image"
     alt="2"
-    src="/icons/square_2.png"
+    src="/assets/icons/square_2.png"
     draggable="false"
   />
 {:else if value === 3}
   <img
     class="square-image"
     alt="3"
-    src="/icons/square_3.png"
+    src="/assets/icons/square_3.png"
     draggable="false"
   />
 {/if}

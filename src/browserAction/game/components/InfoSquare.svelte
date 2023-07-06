@@ -24,7 +24,7 @@
   <img
     class="voltorb-image-item"
     alt="voltorb"
-    src="/icons/voltorb_48x48.png"
+    src="/assets/icons/voltorb_48x48.png"
     draggable="false"
   />
   <span class="voltorbs-item">

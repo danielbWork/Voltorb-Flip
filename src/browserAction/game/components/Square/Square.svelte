@@ -60,7 +60,7 @@
         <img
           class="square-image"
           alt="hidden"
-          src="/icons/hidden_square.png"
+          src="/assets/icons/hidden_square.png"
           draggable="false"
         />
 
