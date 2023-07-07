@@ -14,8 +14,6 @@
   export let color;
 </script>
 
-<!-- TODO update the ui here to match game specifically text font and voltorb image-->
-
 <div class="grid-container" style="background-color: {color};">
   <span class="sum-item">
     {#if sum < 10}0{/if}{sum}

@@ -127,7 +127,6 @@
     z-index: 1;
   }
 
-  /* TODO see if selected overlay can look better/ fix the stupid lines not being equal */
   .flip-box-selected {
     outline: 4px solid #683028;
     z-index: 3;

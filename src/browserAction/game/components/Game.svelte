@@ -116,5 +116,4 @@
     handleHiddenSquareFlip($selectedId);
   }}
 />
-<!-- TODO fix text font -->
 <GameModal bind:this={modal} text={modalText} />

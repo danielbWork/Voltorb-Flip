@@ -36,7 +36,6 @@
     hide();
   }}
 />
-<!-- TODO add custom fonts -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef} on:click={hide}>
   <div class="container">
