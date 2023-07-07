@@ -7,7 +7,7 @@
 </div>
 
 <!-- TODO Mention the following: Thefontsmagazine.com, pokemon, smogon.com, https://voltorbflip.brandon-stein.com/-->
-<!-- bulbapedia.bulbagarden.net/, -->
+<!-- bulbapedia.bulbagarden.net/, www.pentacom.jp, pokemon infinitefusions-->
 <style>
   div {
     height: 600px;
