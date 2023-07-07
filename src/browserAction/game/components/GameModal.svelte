@@ -71,18 +71,23 @@
     margin-right: 10px;
   }
 
+  @font-face {
+    font-family: pokemon;
+    src: url(/assets/fonts/pokemon-ds-font.ttf);
+  }
   .dialog-text {
     width: 400px;
-    height: 70px;
+    height: 60px;
     display: block;
     appearance: none;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8;
     background-color: #f8f8f8;
-    font-size: 20px;
+    font-size: 28px;
     border: 0px;
     outline: 0px;
     resize: none;
-    line-height: 1.6;
+    line-height: 1;
+    font-family: pokemon;
   }
 </style>

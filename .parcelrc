@@ -2,6 +2,9 @@
 {
 	"extends": "@parcel/config-webextension",
 	"transformers": {
-		"*.svelte": ["parcel-transformer-svelte"]
+		"*.svelte": ["parcel-transformer-svelte"],
+		"*.ttf": [
+            "@parcel/transformer-raw"
+        ]
 	}
 }

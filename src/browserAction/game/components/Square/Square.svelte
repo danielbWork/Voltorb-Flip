@@ -93,18 +93,18 @@
 
   .row-line {
     width: 14px;
-    height: 10px;
+    height: 8px;
     border-top: 4px solid #d0e8e0;
     border-bottom: 4px solid #d0e8e0;
-    margin-top: 17px;
+    margin-top: 19px;
     z-index: 2;
   }
 
   .col-line {
-    width: 10px;
+    width: 8px;
     height: 14px;
     border: 4px solid #d0e8e0;
-    margin-left: 17px;
+    margin-left: 19px;
     z-index: 2;
   }
 

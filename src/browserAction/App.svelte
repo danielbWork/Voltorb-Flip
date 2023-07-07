@@ -6,6 +6,8 @@
   <Game />
 </div>
 
+<!-- TODO Mention the following: Thefontsmagazine.com, pokemon, smogon.com, https://voltorbflip.brandon-stein.com/-->
+<!-- bulbapedia.bulbagarden.net/, -->
 <style>
   div {
     height: 600px;

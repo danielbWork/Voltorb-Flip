@@ -43,29 +43,38 @@
     outline: 4px solid #d0e8e0;
     border-radius: 1px;
   }
+
+  @font-face {
+    font-family: numbers;
+    src: url(/assets/fonts/voltorb-flip-info-numbers.ttf);
+  }
   span {
-    font-size: 20px;
     text-align: right;
-    padding-right: 4px;
     color: #404040;
+    font-family: numbers;
+    line-height: 1.3;
+    letter-spacing: 2px;
+    font-size: 19px;
   }
 
   .sum-item {
     grid-row: 1;
     grid-column: 1 / span 2;
-    height: 20px;
+    height: 22px;
     margin-top: -3px;
+    margin-right: -3px;
     border-bottom: 4px solid #d0e8e0;
   }
 
   .voltorb-image-item {
-    height: 33px;
-    width: 33px;
+    height: 31px;
+    width: 31px;
     margin-top: -10px;
-    padding-left: 0px;
+    padding-left: 2px;
   }
 
   .voltorbs-item {
-    margin-top: -6px;
+    margin-top: -7px;
+    margin-right: -2px;
   }
 </style>
