@@ -105,11 +105,13 @@
 <ScoreDisplay />
 
 <Board on:hiddenClick={handleHiddenClick} on:revealClick={handleRevealClick} />
+<div class="footer">
+  <button>Settings</button>
+  <button>Rules</button>
+  <button>About</button>
 
-<!-- TODO add settings and about page -->
-
-<MemoDisplay />
-
+  <MemoDisplay />
+</div>
 <KeyEventsHandler
   ignoreOnKeyDown={isMidClick}
   on:flipSelectedSquare={() => {
@@ -117,3 +119,36 @@
   }}
 />
 <LevelDialog bind:this={modal} text={modalText} />
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: row;
+    padding-left: 15px;
+    margin-top: -20px;
+  }
+
+  @font-face {
+    font-family: pokemon;
+    src: url(/assets/fonts/pokemon-ds-font.ttf);
+  }
+  button {
+    background-image: url("/assets/icons/button_background.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    font-family: pokemon;
+    width: 115px;
+    height: 40px;
+    padding: 4px;
+    font-size: 22px;
+    text-align: center;
+    margin: 4px;
+    margin-top: 16px;
+    color: #f7f7f7;
+    text-shadow: 1px 0px #373737, 0px 1px #373737, -1px 0px #373737,
+      0px -1px #373737;
+    outline: 0px;
+    border: 0px;
+  }
+</style>

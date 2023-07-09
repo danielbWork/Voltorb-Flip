@@ -45,13 +45,11 @@
   </div>
 {/if}
 
-<!-- TODO remove left margin after adding other buttons -->
 <style>
   .container {
     height: 68px;
     width: 68px;
-    margin-top: -25px;
-    margin-left: 386px;
+    margin-left: 10px;
     outline: 3px solid #404040;
     border: 3px solid #906860;
     background-color: #e89880;

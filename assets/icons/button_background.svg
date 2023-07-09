@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 60 26" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com" preserveAspectRatio="none">
+  <path d="M 1 1 H 59 V 25 H 1 V 1 Z" style="fill: rgb(50, 104, 222); stroke: rgb(63, 63, 63); stroke-width: 2px;"/>
+  <path d="M 3 3 H 57 V 11 H 3 V 3 Z" style="fill: rgb(104, 168, 246); stroke: rgb(0, 0, 0); stroke-width: 0px;"/>
+  <path d="M 3 11 H 57 V 13 H 3 V 11 Z" style="fill: rgb(73, 136, 238); stroke: rgb(0, 0, 0); stroke-width: 0px;"/>
+</svg>
