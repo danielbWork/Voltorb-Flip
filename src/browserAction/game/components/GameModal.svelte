@@ -88,5 +88,6 @@
     resize: none;
     line-height: 1;
     font-family: pokemon;
+    text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
   }
 </style>

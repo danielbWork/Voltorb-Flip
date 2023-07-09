@@ -37,7 +37,7 @@
     padding: 4px;
     font-size: 22px;
 
-    text-shadow: 1px 1px #a0a0a8;
+    text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
     font-family: pokemon;
   }
 
