@@ -6,7 +6,7 @@
   import { isMemoOpen, selectedId, game } from "../stores";
 
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
-  import GameModal from "./GameModal.svelte";
+  import LevelDialog from "./LevelDialog.svelte";
 
   let isMidClick = false;
 
@@ -116,4 +116,4 @@
     handleHiddenSquareFlip($selectedId);
   }}
 />
-<GameModal bind:this={modal} text={modalText} />
+<LevelDialog bind:this={modal} text={modalText} />
