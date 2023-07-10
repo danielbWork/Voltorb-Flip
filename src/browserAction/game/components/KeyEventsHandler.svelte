@@ -1,7 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { settings } from "../Settings";
-  import { isMemoOpen, selectedId, game, selectedSquare } from "../stores";
+  import {
+    isMemoOpen,
+    selectedId,
+    game,
+    selectedSquare,
+    isDialogOpen,
+  } from "../stores";
 
   /**
    * Flag to notify that key events should be ignored
@@ -15,7 +21,7 @@
    * @param event The keyboard event mainly used for the key value
    */
   function handleOnKeydown(event) {
-    if (ignoreOnKeyDown) return;
+    if (ignoreOnKeyDown || $isDialogOpen) return;
 
     const keybindings = settings.keybindings;
 
