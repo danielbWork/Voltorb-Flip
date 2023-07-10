@@ -1,6 +1,6 @@
 <script>
   import InfoSquare from "./InfoSquare.svelte";
-  import Square from "./Square/Square.svelte";
+  import Square from "./square/Square.svelte";
   import { isMemoOpen, selectedId, game } from "../stores";
 
   const infoColors = ["#e07050", "#40a840", "#e8a038", "#3090f8", "#c060e0"];
