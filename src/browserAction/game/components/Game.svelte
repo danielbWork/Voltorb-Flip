@@ -6,8 +6,8 @@
   import { isMemoOpen, selectedId, game } from "../stores";
 
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
-  import LevelDialog from "./LevelDialog.svelte";
-  import Rules from "../../components/Rules.svelte";
+  import LevelDialog from "./dialogs/LevelDialog.svelte";
+  import Rules from "./dialogs/Rules.svelte";
 
   let isMidClick = false;
 
@@ -121,7 +121,7 @@
   <MemoDisplay />
 </div>
 <KeyEventsHandler
-  ignoreOnKeyDown={isMidClick}
+  ignoreOnKeyDown={isMidClick || rulesModal?.isOpen()}
   on:flipSelectedSquare={() => {
     handleHiddenSquareFlip($selectedId);
   }}

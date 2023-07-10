@@ -28,6 +28,7 @@
 
 <svelte:window
   on:keydown={(e) => {
+    e.preventDefault();
     hide();
   }}
 />
@@ -65,11 +66,5 @@
     color: #f7f7f7;
     text-shadow: 1px 0px #373737, 0px 1px #373737, -1px 0px #373737,
       0px -1px #373737;
-  }
-
-  .voltorb {
-    width: 24px;
-    height: 24px;
-    margin-bottom: -5px;
   }
 </style>
