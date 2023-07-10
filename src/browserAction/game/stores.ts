@@ -36,3 +36,8 @@ export const selectedSquare = derived(
     return $game.board[$selectedId.row][$selectedId.col];
   }
 );
+
+/**
+ * Used to mark that a dialog is currently being displayed
+ */
+export const isDialogOpen = writable(false);
