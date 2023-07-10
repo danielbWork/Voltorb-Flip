@@ -7,11 +7,15 @@
 
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
   import LevelDialog from "./LevelDialog.svelte";
+  import Rules from "../../components/Rules.svelte";
 
   let isMidClick = false;
 
   let modal;
   let modalText = "";
+
+  let rulesModal;
+
   /**
    * Utils function for async code to delay for a certain time
    * @param {number} ms How long we need to wait
@@ -107,7 +111,11 @@
 <Board on:hiddenClick={handleHiddenClick} on:revealClick={handleRevealClick} />
 <div class="footer">
   <button>Settings</button>
-  <button>Rules</button>
+  <button
+    on:click={() => {
+      rulesModal.show();
+    }}>Rules</button
+  >
   <button>About</button>
 
   <MemoDisplay />
@@ -119,6 +127,7 @@
   }}
 />
 <LevelDialog bind:this={modal} text={modalText} />
+<Rules bind:this={rulesModal} />
 
 <style>
   .footer {
