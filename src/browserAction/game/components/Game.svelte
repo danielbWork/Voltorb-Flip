@@ -1,18 +1,21 @@
 <script>
-  import { hasFinishedLevel, isExploding, selectedSquare } from "../stores";
+  import {
+    hasFinishedLevel,
+    isDialogOpen,
+    isExploding,
+    selectedSquare,
+  } from "../stores";
   import Board from "./Board.svelte";
   import MemoDisplay from "./MemoDisplay.svelte";
   import ScoreDisplay from "./ScoreDisplay.svelte";
   import { isMemoOpen, selectedId, game } from "../stores";
 
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
-  import LevelDialog from "./dialogs/LevelDialog.svelte";
-  import Rules from "./dialogs/Rules.svelte";
+  import DialogHandler from "./dialogs/DialogHandler.svelte";
 
   let isMidClick = false;
 
-  let modal;
-  let modalText = "";
+  let dialogHandlerModal;
 
   let rulesModal;
 
@@ -50,14 +53,14 @@
       }
       $isExploding = false;
 
-      modalText = levelEnded
+      const message = levelEnded
         ? `Game clear!\nYou received ${$game.currentScore} Coin(s)!`
         : "Oh no! You get 0 Coins!";
 
-      modal.show(true);
+      dialogHandlerModal.showLevelDialog(message);
 
       // waits until the dialog is closed
-      while (modal.isOpen()) {
+      while ($isDialogOpen) {
         await delay(100);
       }
 
@@ -113,7 +116,7 @@
   <button>Settings</button>
   <button
     on:click={() => {
-      rulesModal.show();
+      dialogHandlerModal.showRules();
     }}>Rules</button
   >
   <button>About</button>
@@ -126,8 +129,8 @@
     handleHiddenSquareFlip($selectedId);
   }}
 />
-<LevelDialog bind:this={modal} text={modalText} />
-<Rules bind:this={rulesModal} />
+
+<DialogHandler bind:this={dialogHandlerModal} />
 
 <style>
   .footer {

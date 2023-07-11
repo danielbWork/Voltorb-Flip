@@ -1,4 +1,6 @@
 <script>
+  import { isDialogOpen } from "../../stores";
+
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
    */
@@ -15,6 +17,7 @@
    * Closes the dialog
    */
   export function hide() {
+    $isDialogOpen;
     dialogRef.close();
   }
 
