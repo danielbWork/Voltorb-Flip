@@ -119,7 +119,6 @@
       dialogHandlerModal.showRules();
     }}>Rules</button
   >
-  <button>About</button>
 
   <MemoDisplay />
 </div>
@@ -150,13 +149,14 @@
     background-size: 100% 100%;
     background-position: center;
     font-family: pokemon;
-    width: 115px;
+    width: 150px;
     height: 40px;
     padding: 4px;
     font-size: 22px;
     text-align: center;
     margin: 4px;
-    margin-top: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
     color: #f7f7f7;
     text-shadow: 1px 0px #373737, 0px 1px #373737, -1px 0px #373737,
       0px -1px #373737;

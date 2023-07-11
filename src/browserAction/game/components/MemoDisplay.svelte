@@ -49,7 +49,7 @@
   .container {
     height: 68px;
     width: 68px;
-    margin-left: 10px;
+    margin-left: 40px;
     outline: 3px solid #404040;
     border: 3px solid #906860;
     background-color: #e89880;
