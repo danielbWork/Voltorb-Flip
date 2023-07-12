@@ -113,7 +113,11 @@
 
 <Board on:hiddenClick={handleHiddenClick} on:revealClick={handleRevealClick} />
 <div class="footer">
-  <button>Settings</button>
+  <button
+    on:click={() => {
+      dialogHandlerModal.showSettings();
+    }}>Settings</button
+  >
   <button
     on:click={() => {
       dialogHandlerModal.showRules();

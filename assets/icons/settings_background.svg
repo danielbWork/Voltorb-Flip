@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <path d="M 0 0 H 500 V 300 H 0 V 0 Z" style="fill: rgb(136, 136, 200); stroke: rgb(40, 48, 48); stroke-width: 2px;"/>
+  <path d="M 5 5 H 495 V 295 H 5 V 5 Z" style="fill: rgb(216, 208, 216); stroke: rgb(112, 104, 128); stroke-width: 4px;"/>
+  <path d="M 9 9 H 491 V 291 H 9 V 9 Z" style="fill: rgb(248, 248, 248); stroke: rgb(0, 0, 0); stroke-width: 0px;"/>
+</svg>

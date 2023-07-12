@@ -17,7 +17,7 @@
    * Closes the dialog
    */
   export function hide() {
-    $isDialogOpen;
+    $isDialogOpen = false;
     dialogRef.close();
   }
 
