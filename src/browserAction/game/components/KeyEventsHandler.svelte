@@ -23,7 +23,7 @@
   function handleOnKeydown(event) {
     if (ignoreOnKeyDown || $isDialogOpen) return;
 
-    const keybindings = settings.keybindings;
+    const keybindings = $settings.keybindings;
 
     key = event.key;
     // TODO  enable keybind selection
@@ -32,7 +32,7 @@
       return;
     }
 
-    if (keybindings.memos.includes(key)) {
+    if (Object.values(keybindings.memos).includes(key)) {
       handleNumberKey(key);
     }
 
@@ -59,7 +59,7 @@
   function handleArrowClick(key) {
     let { row, col } = $selectedId;
 
-    const keybindings = settings.keybindings.movement;
+    const keybindings = $settings.keybindings.movement;
 
     switch (key) {
       case keybindings.up:
@@ -100,9 +100,28 @@
    */
   function handleNumberKey(key) {
     const memos = $selectedSquare.memos;
-    const keybindings = settings.keybindings.memos;
+    const keybindings = $settings.keybindings.memos;
 
-    memos[keybindings.indexOf(key)] = !memos[keybindings.indexOf(key)];
+    switch (key) {
+      case keybindings.voltorb:
+        memos[0] = !memos[0];
+        break;
+
+      case keybindings.one:
+        memos[1] = !memos[1];
+        break;
+
+      case keybindings.two:
+        memos[2] = !memos[2];
+        break;
+
+      case keybindings.three:
+        memos[3] = !memos[3];
+        break;
+
+      default:
+        break;
+    }
 
     // Needed to refresh
     $game.board = $game.board;

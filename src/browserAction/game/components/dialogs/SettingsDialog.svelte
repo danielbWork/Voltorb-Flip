@@ -47,6 +47,8 @@
   </div>
 </dialog>
 
+<!-- TODO Add page button -->
+
 <style>
   dialog {
     background-color: #c0c8d0;
@@ -56,7 +58,7 @@
   }
 
   .container {
-    width: 500px;
+    width: 400px;
     height: 300px;
     display: flex;
     flex-direction: column;
