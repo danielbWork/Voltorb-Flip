@@ -5,7 +5,7 @@
   import { isDialogOpen } from "../../stores";
   import LevelDialog from "./LevelDialog.svelte";
   import RulesDialog from "./RulesDialog.svelte";
-  import SettingsDialog from "./SettingsDialog.svelte";
+  import SettingsDialog from "./settings/SettingsDialog.svelte";
 
   let levelDialogModel;
   let levelDialogText = "";

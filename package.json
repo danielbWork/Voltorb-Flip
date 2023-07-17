@@ -4,8 +4,8 @@
 	"description": "Allows you to play voltorb flip",
 	"main": "index.js",
 	"scripts": {
-		"start": "parcel manifest.json assets/*/* --host localhost --target webext-dev --dist-dir dist/webext-dev",
-		"build": "parcel build manifest.json assets/*/* --target webext-prod"
+		"start": "parcel manifest.json assets/*/* src/browserAction/index.html --host localhost --target webext-dev --dist-dir dist/webext-dev",
+		"build": "parcel build manifest.json assets/*/* src/browserAction/index.html --target webext-prod"
 	},
 	"keywords": [],
 	"author": "Daniel Bauer",

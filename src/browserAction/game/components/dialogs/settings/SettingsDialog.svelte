@@ -1,5 +1,8 @@
 <script>
-  import { isDialogOpen } from "../../stores";
+  import { browserAction, tabs } from "webextension-polyfill";
+  import { settings } from "../../../Settings";
+  import { isDialogOpen } from "../../../stores";
+  import KeyboardSetting from "./KeyboardSetting.svelte";
 
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
@@ -27,6 +30,8 @@
   export function isOpen() {
     return dialogRef.open;
   }
+
+  $: keybindings = $settings.keybindings;
 </script>
 
 <svelte:window
@@ -41,10 +46,25 @@
   <div class="container">
     <span class="selected">test</span>
     <span class="selected2">test</span>
-    <span>test</span>
-    <span>test</span>
-    <span>test</span>
+    <span>Keybindings:</span>
+    <KeyboardSetting title="Toggle Memo" value={keybindings.toggleMemo} />
   </div>
+  <!-- TODO make sure the button doesn't appear if in screen -->
+  <button
+    on:click={() => {
+      //TODO clean this up  and maybe move this button
+      tabs
+        .create({ url: "src/browserAction/index.html", active: true })
+        .then((tab) => {
+          // TODO fix this maybe with content page for apps pages
+          tabs.setZoom(1.5);
+          tabs.setZoomSettings({
+            defaultZoomFactor: 1.5,
+            mode: "manual",
+          });
+        });
+    }}>Open in a webpage</button
+  >
 </dialog>
 
 <!-- TODO Add page button -->
