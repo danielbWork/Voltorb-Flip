@@ -9,7 +9,8 @@
   export let value;
 </script>
 
-<div class="container">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="container" on:click>
   <span>{title}:</span>
   <!-- Maybe surround in box or something -->
   <div class="value">
@@ -23,7 +24,7 @@
     flex-direction: row;
     justify-content: space-around;
     width: inherit;
-    gap: 50%;
+    gap: 40%;
   }
 
   @font-face {

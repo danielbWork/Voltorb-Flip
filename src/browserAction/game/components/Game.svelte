@@ -12,20 +12,13 @@
 
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
   import DialogHandler from "./dialogs/DialogHandler.svelte";
+  import { delay } from "../../utils";
 
   let isMidClick = false;
 
   let dialogHandlerModal;
 
   let rulesModal;
-
-  /**
-   * Utils function for async code to delay for a certain time
-   * @param {number} ms How long we need to wait
-   */
-  async function delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
 
   /**
    * Handles user "flipping" a hidden square open ant reacts accordingly

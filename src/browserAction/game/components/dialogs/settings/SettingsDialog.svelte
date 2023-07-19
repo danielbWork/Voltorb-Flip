@@ -3,11 +3,19 @@
   import { settings } from "../../../Settings";
   import { isDialogOpen } from "../../../stores";
   import KeyboardSetting from "./KeyboardSetting.svelte";
+  import UpdateKeybindingDialog from "./UpdateKeybindingDialog.svelte";
+  import { delay } from "../../../../utils";
 
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
    */
   let dialogRef;
+
+  let updateModal;
+
+  $: keybindings = $settings.keybindings;
+
+  let updateValue;
 
   /**
    * Opens the dialog to be displayed
@@ -20,8 +28,8 @@
    * Closes the dialog
    */
   export function hide() {
-    $isDialogOpen = false;
-    dialogRef.close();
+    // $isDialogOpen = false;
+    // dialogRef.close();
   }
 
   /**
@@ -31,23 +39,56 @@
     return dialogRef.open;
   }
 
-  $: keybindings = $settings.keybindings;
-</script>
+  /**
+   * Reacts to user selecting a key binding to update
+   * @param action The action the user wants to update
+   */
+  async function handleKeybindingSelect(action) {
+    updateValue = keybindings[action];
 
-<svelte:window
-  on:keydown={(e) => {
-    // TODO read update forbutton
-  }}
-/>
+    // Updates inner dialog
+    await delay(200);
+
+    updateModal.show();
+
+    while (updateModal.isOpen()) {
+      await delay(200);
+    }
+
+    let tempSettings = { ...$settings };
+    tempSettings["keybindings"][action] = updateModal.getValue();
+
+    console.log(tempSettings);
+
+    $settings = tempSettings;
+
+    console.log($settings);
+
+    updateValue = undefined;
+
+    // TODO add apply logic here instead
+    dialogRef.close();
+  }
+
+  // TODO update ui
+</script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef} on:click={hide}>
   <span>Settings</span>
   <div class="container">
-    <span class="selected">test</span>
-    <span class="selected2">test</span>
+    <div>
+      <!-- TODO add shiny charm code here -->
+    </div>
     <span>Keybindings:</span>
-    <KeyboardSetting title="Toggle Memo" value={keybindings.toggleMemo} />
+    <KeyboardSetting
+      title="Toggle Memo"
+      value={keybindings.toggleMemo}
+      on:click={() => {
+        // TODO maybe find some better way of doing this
+        handleKeybindingSelect("toggleMemo");
+      }}
+    />
   </div>
   <!-- TODO make sure the button doesn't appear if in screen -->
   <button
@@ -66,6 +107,8 @@
         });
     }}>Open in a webpage</button
   >
+
+  <UpdateKeybindingDialog bind:this={updateModal} value={updateValue} />
 </dialog>
 
 <!-- TODO Add page button -->
