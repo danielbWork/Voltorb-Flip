@@ -41,8 +41,6 @@
     const levelEnded = $game.selectSquare(id);
     $game = $game;
 
-    console.log($selectedSquare);
-
     if (levelEnded !== undefined) {
       // First square
       await delay(300);

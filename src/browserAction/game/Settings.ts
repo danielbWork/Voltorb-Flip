@@ -32,8 +32,6 @@ function createSettings() {
   const { subscribe, set } = writable<Record<string, any>>(defaultSettings);
 
   storage.local.get().then((value) => {
-    console.log(value);
-
     // Initializes settings
     if (!value?.keybindings) {
       storage.local.set(defaultSettings);

@@ -57,11 +57,12 @@
         .create({ url: "src/browserAction/index.html", active: true })
         .then((tab) => {
           // TODO fix this maybe with content page for apps pages
-          tabs.setZoom(1.5);
-          tabs.setZoomSettings({
-            defaultZoomFactor: 1.5,
-            mode: "manual",
-          });
+          tabs.setZoom(tab.id, 1.5);
+          // tabs.setZoomSettings(tab.id, {
+          //   defaultZoomFactor: 1.5,
+          //   mode: "disabled",
+          //   scope: "per-tab",
+          // });
         });
     }}>Open in a webpage</button
   >

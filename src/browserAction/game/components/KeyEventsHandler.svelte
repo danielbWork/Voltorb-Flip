@@ -25,7 +25,7 @@
 
     const keybindings = $settings.keybindings;
 
-    key = event.key;
+    const key = event.key;
     // TODO  enable keybind selection
     if (Object.values(keybindings.movement).includes(key)) {
       handleArrowClick(key);
