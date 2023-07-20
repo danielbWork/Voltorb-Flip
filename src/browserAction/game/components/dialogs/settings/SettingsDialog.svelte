@@ -1,7 +1,7 @@
 <script>
-  import { browserAction, tabs } from "webextension-polyfill";
+  import { tabs } from "webextension-polyfill";
   import { settings } from "../../../Settings";
-  import { isDialogOpen } from "../../../stores";
+  import { isDialogOpen, isInTab } from "../../../stores";
   import KeyboardSetting from "./KeyboardSetting.svelte";
   import UpdateKeybindingDialog from "./UpdateKeybindingDialog.svelte";
   import { delay } from "../../../../utils";
@@ -28,8 +28,8 @@
    * Closes the dialog
    */
   export function hide() {
-    // $isDialogOpen = false;
-    // dialogRef.close();
+    $isDialogOpen = false;
+    dialogRef.close();
   }
 
   /**
@@ -67,14 +67,14 @@
     updateValue = undefined;
 
     // TODO add apply logic here instead
-    dialogRef.close();
+    hide();
   }
 
   // TODO update ui
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<dialog bind:this={dialogRef} on:click={hide}>
+<dialog bind:this={dialogRef}>
   <span>Settings</span>
   <div class="container">
     <div>
@@ -90,23 +90,19 @@
       }}
     />
   </div>
-  <!-- TODO make sure the button doesn't appear if in screen -->
-  <button
-    on:click={() => {
-      //TODO clean this up  and maybe move this button
-      tabs
-        .create({ url: "src/browserAction/index.html", active: true })
-        .then((tab) => {
-          // TODO fix this maybe with content page for apps pages
-          tabs.setZoom(tab.id, 1.5);
-          // tabs.setZoomSettings(tab.id, {
-          //   defaultZoomFactor: 1.5,
-          //   mode: "disabled",
-          //   scope: "per-tab",
-          // });
-        });
-    }}>Open in a webpage</button
-  >
+
+  {#if !$isInTab}
+    <button
+      on:click={() => {
+        //TODO clean this up  and maybe move this button
+        tabs
+          .create({ url: "src/browserAction/index.html", active: true })
+          .then((tab) => {
+            window.close();
+          });
+      }}>Open in a webpage</button
+    >
+  {/if}
 
   <UpdateKeybindingDialog bind:this={updateModal} value={updateValue} />
 </dialog>

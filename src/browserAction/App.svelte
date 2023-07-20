@@ -1,5 +1,17 @@
 <script>
+  import { onMount } from "svelte";
   import Game from "./game/components/Game.svelte";
+  import { browserAction, tabs } from "webextension-polyfill";
+  import { isInTab } from "./game/stores";
+
+  // TODO update all pixal values by 1.5 since zoom api sucks
+
+  onMount(async () => {
+    if ($isInTab) {
+      const tab = (await tabs.query({ active: true }))[0];
+      browserAction.disable(tab.id);
+    }
+  });
 </script>
 
 <div>

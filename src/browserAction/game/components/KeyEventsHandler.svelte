@@ -26,18 +26,21 @@
     const keybindings = $settings.keybindings;
 
     const key = event.key;
+
+    let isUsed = false;
+
     // TODO  enable keybind selection
     if (Object.values(keybindings.movement).includes(key)) {
-      handleArrowClick(key);
-      return;
+      isUsed = handleArrowClick(key);
     }
 
     if (Object.values(keybindings.memos).includes(key)) {
-      handleNumberKey(key);
+      isUsed = handleNumberKey(key) || isUsed;
     }
 
     switch (key) {
       case keybindings.flipSquare:
+        isUsed = true;
         if ($game.board[$selectedId.row][$selectedId.col].isHidden) {
           dispatch("flipSelectedSquare");
         }
@@ -45,16 +48,25 @@
 
       case keybindings.toggleMemo:
         $isMemoOpen = !$isMemoOpen;
+        isUsed = true;
         break;
 
       default:
         break;
+    }
+
+    //TODO still needs some fixes
+
+    // If key is one of ours prevents code
+    if (isUsed) {
+      event.preventDefault();
     }
   }
 
   /**
    * Handles the user pressing one of the arrow keys and updates the selected square
    * @param key The key the user pressed
+   * @returns Whether or not the value passed is was a known keybind
    */
   function handleArrowClick(key) {
     let { row, col } = $selectedId;
@@ -88,15 +100,18 @@
         break;
 
       default:
+        return false;
         break;
     }
 
     $selectedId = { row, col };
+    return true;
   }
 
   /**
    * Handles the user pressing one of the number keys and updates the selected square
    * @param key The key the user pressed
+   * @returns Whether or not the value passed is was a known keybind
    */
   function handleNumberKey(key) {
     const memos = $selectedSquare.memos;
@@ -120,12 +135,14 @@
         break;
 
       default:
+        return false;
         break;
     }
 
     // Needed to refresh
     $game.board = $game.board;
+    return true;
   }
 </script>
 
-<svelte:window on:keydown|preventDefault={handleOnKeydown} />
+<svelte:window on:keydown={handleOnKeydown} />

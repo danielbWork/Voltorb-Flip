@@ -1,4 +1,4 @@
-import { derived, writable } from "svelte/store";
+import { derived, readable, readonly, writable } from "svelte/store";
 import { SquareId } from "./types";
 import { GameManager } from "./GameManager";
 
@@ -41,3 +41,8 @@ export const selectedSquare = derived(
  * Used to mark that a dialog is currently being displayed
  */
 export const isDialogOpen = writable(false);
+
+/**
+ * Used to determine if running in a tab or popup
+ */
+export const isInTab = readable(window.location.href.endsWith("index.html"));
