@@ -67,10 +67,10 @@
 <style>
   .memo-image {
     margin-bottom: 0px;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     z-index: 0;
-    padding: 3px;
+    padding: 5px;
     position: absolute;
   }
 
@@ -81,9 +81,9 @@
   }
 
   .memo-pencil {
-    width: 25px;
-    height: 25px;
-    margin-top: 12px;
-    margin-left: 12px;
+    width: 37px;
+    height: 37px;
+    margin-top: 18px;
+    margin-left: 18px;
   }
 </style>

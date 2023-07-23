@@ -57,8 +57,8 @@
 
 <style>
   .container {
-    width: 150px;
-    height: 100px;
+    width: 225px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     background-image: url("/assets/icons/settings_background.svg");
@@ -66,7 +66,7 @@
     background-size: 100% 100%;
     background-position: center;
     align-items: center;
-    padding-left: 4px;
+    padding-left: 6px;
   }
 
   @font-face {
@@ -76,10 +76,10 @@
 
   span {
     font-family: pokemon;
-    padding: 4px;
-    font-size: 22px;
+    padding: 6px;
+    font-size: 33px;
     text-align: center;
-    margin: 4px;
+    margin: 6px;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
   }

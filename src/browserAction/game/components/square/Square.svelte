@@ -2,7 +2,12 @@
   import { createEventDispatcher } from "svelte";
   import SquareMemo from "./SquareMemo.svelte";
   import RevealedSquareImage from "./RevealedSquareImages.svelte";
-  import { hasFinishedLevel, isExploding, isMemoOpen } from "../../stores";
+  import {
+    hasFinishedLevel,
+    isExploding,
+    isInTab,
+    isMemoOpen,
+  } from "../../stores";
 
   /**
    * @type {import ("../../types.js").BoardSquare} The Square this represents
@@ -80,7 +85,11 @@
     </div>
   </div>
 
-  <div class="row-line" style="background-color: {rowGapColor};" />
+  <div
+    class="row-line"
+    style="background-color: {rowGapColor};"
+    class:row-line-popup={!$isInTab}
+  />
   <div class="col-line" style="background-color: {colGapColor};" />
 </div>
 
@@ -92,24 +101,29 @@
   }
 
   .row-line {
-    width: 14px;
-    height: 8px;
-    border-top: 4px solid #d0e8e0;
-    border-bottom: 4px solid #d0e8e0;
-    margin-top: 19px;
-    z-index: 2;
+    width: 21px;
+    height: 12px;
+    border-top: 6px solid #d0e8e0;
+    border-bottom: 6px solid #d0e8e0;
+    margin-top: 28px;
+    z-index: 0;
+  }
+
+  /* For pop up display specifically */
+  .row-line-popup {
+    width: 30px;
   }
 
   .col-line {
-    width: 8px;
-    height: 14px;
-    border: 4px solid #d0e8e0;
-    margin-left: 19px;
-    z-index: 2;
+    width: 12px;
+    height: 18px;
+    border: 6px solid #d0e8e0;
+    margin-left: 28px;
+    z-index: 0;
   }
 
   .square-image {
-    margin-bottom: -2px;
+    margin-bottom: -3px;
     width: inherit;
     height: inherit;
     z-index: -1;
@@ -117,10 +131,10 @@
 
   /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
   .flip-box {
-    width: 54px;
-    height: 54px;
+    width: 81px;
+    height: 81px;
     border-radius: 1px;
-    outline: 4px solid #d0e8e0;
+    outline: 6px solid #d0e8e0;
     background-color: #404040;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     display: block;
@@ -128,34 +142,34 @@
   }
 
   .flip-box-selected {
-    outline: 4px solid #683028;
+    outline: 6px solid #683028;
     z-index: 3;
   }
 
   .flip-box-selected-memo {
-    outline: 4px solid #785820;
+    outline: 6px solid #785820;
   }
 
   /* This container is needed to position the front and back side */
   .flip-box-inner {
     transition: transform 0.3s;
     transform-style: preserve-3d;
-    border: 2px solid #282828;
-    width: 50px;
-    height: 50px;
+    border: 3px solid #282828;
+    width: 75px;
+    height: 75px;
   }
 
   .flip-box-inner-selected {
-    border-radius: 2px;
-    outline: 4px solid #f84030;
+    border-radius: 3px;
+    outline: 6px solid #f84030;
     border-spacing: 0px;
-    border: 2px solid #f84030;
-    outline-offset: -2px;
+    border: 3px solid #f84030;
+    outline-offset: -3px;
   }
 
   .flip-box-inner-selected-memo {
-    outline: 4px solid #f8b830;
-    border: 2px solid #f8b830;
+    outline: 6px solid #f8b830;
+    border: 3px solid #f8b830;
   }
 
   /* Do an horizontal flip when you move the mouse over the flip box container */

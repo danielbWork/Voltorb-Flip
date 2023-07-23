@@ -76,7 +76,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef}>
   <span>Settings</span>
-  <div class="container">
+  <div class="container" class:container-popup={!$isInTab}>
     <div>
       <!-- TODO add shiny charm code here -->
     </div>
@@ -113,13 +113,13 @@
   dialog {
     background-color: #c0c8d0;
     border: 1px solid #c0c8d0;
-    border-radius: 2px;
-    padding: 2px;
+    border-radius: 3px;
+    padding: 3px;
   }
 
   .container {
-    width: 400px;
-    height: 300px;
+    width: 600px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     background-image: url("/assets/icons/settings_background.svg");
@@ -127,7 +127,13 @@
     background-size: 100% 100%;
     background-position: center;
     align-items: start;
-    padding-left: 4px;
+    padding-left: 6px;
+  }
+
+  /* For pop up display specifically */
+  .container-popup {
+    width: 450px;
+    height: 400px;
   }
 
   @font-face {
@@ -137,10 +143,10 @@
 
   span {
     font-family: pokemon;
-    padding: 4px;
-    font-size: 22px;
+    padding: 6px;
+    font-size: 33px;
     text-align: center;
-    margin: 4px;
+    margin: 6px;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
   }

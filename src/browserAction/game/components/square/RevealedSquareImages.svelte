@@ -72,8 +72,8 @@
 
 <style>
   .voltorb-parent {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     position: relative;
   }
 
@@ -88,7 +88,7 @@
   }
 
   .square-image {
-    margin-bottom: -2px;
+    margin-bottom: -3px;
     width: inherit;
     height: inherit;
     z-index: -1;

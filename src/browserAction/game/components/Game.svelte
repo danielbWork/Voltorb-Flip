@@ -130,8 +130,8 @@
   .footer {
     display: flex;
     flex-direction: row;
-    padding-left: 15px;
-    margin-top: -20px;
+    padding-left: 12px;
+    margin-top: -30px;
   }
 
   @font-face {
@@ -144,14 +144,14 @@
     background-size: 100% 100%;
     background-position: center;
     font-family: pokemon;
-    width: 150px;
-    height: 40px;
-    padding: 4px;
-    font-size: 22px;
+    width: 225px;
+    height: 60px;
+    padding: 6px;
+    font-size: 33px;
     text-align: center;
-    margin: 4px;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin: 6px;
+    margin-top: 15px;
+    margin-left: 15px;
     color: #f7f7f7;
     text-shadow: 1px 0px #373737, 0px 1px #373737, -1px 0px #373737,
       0px -1px #373737;

@@ -47,24 +47,24 @@
 
 <style>
   .container {
-    height: 68px;
-    width: 68px;
-    margin-left: 40px;
-    outline: 3px solid #404040;
-    border: 3px solid #906860;
+    height: 102px;
+    width: 102px;
+    margin-left: 60px;
+    outline: 4px solid #404040;
+    border: 4px solid #906860;
     background-color: #e89880;
     border-radius: 1px;
     display: grid;
     grid-template-columns: auto auto;
     gap: 0px;
-    padding: 2px;
+    padding: 3px;
   }
 
   input[type="checkbox"] {
     appearance: none;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: 100% 100%;
     margin: 0px;
     padding: 0px;
     background-color: #88a8a8;

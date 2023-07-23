@@ -6,15 +6,18 @@
 
   // TODO update all pixal values by 1.5 since zoom api sucks
 
+  // export let isPopup;
+
   onMount(async () => {
     if ($isInTab) {
       const tab = (await tabs.query({ active: true }))[0];
       browserAction.disable(tab.id);
+      tabs.setZoom(1);
     }
   });
 </script>
 
-<div>
+<div class:popup={!$isInTab}>
   <Game />
 </div>
 
@@ -23,9 +26,15 @@
 <!-- bulbapedia.bulbagarden.net/,https://www.pentacom.jp/pentacom/bitfontmaker2/, pokemon infinitefusions-->
 <style>
   div {
+    height: 900px;
+    width: 750px;
+    padding: 12px;
+    background-color: #309f6a;
+  }
+
+  .popup {
+    transform: scale(calc(2 / 3)) translateY(-155px) translateX(-110px);
     height: 600px;
     width: 500px;
-    padding: 8px;
-    background-color: #309f6a;
   }
 </style>

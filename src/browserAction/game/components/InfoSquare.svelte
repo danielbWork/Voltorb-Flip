@@ -34,12 +34,13 @@
   .grid-container {
     user-select: none;
 
-    width: 54px;
-    height: 54px;
+    width: 81px;
+    height: 81px;
     display: grid;
-    row-gap: 10px;
-    outline: 4px solid #d0e8e0;
+    row-gap: 15px;
+    outline: 6px solid #d0e8e0;
     border-radius: 1px;
+    z-index: 2;
   }
 
   @font-face {
@@ -51,28 +52,28 @@
     color: #404040;
     font-family: numbers;
     line-height: 1.3;
-    letter-spacing: 2px;
-    font-size: 19px;
+    letter-spacing: 3px;
+    font-size: 28px;
   }
 
   .sum-item {
     grid-row: 1;
     grid-column: 1 / span 2;
-    height: 22px;
-    margin-top: -3px;
-    margin-right: -3px;
-    border-bottom: 4px solid #d0e8e0;
+    height: 33px;
+    margin-top: -4px;
+    margin-right: -4px;
+    border-bottom: 6px solid #d0e8e0;
   }
 
   .voltorb-image-item {
-    height: 31px;
-    width: 31px;
-    margin-top: -10px;
-    padding-left: 2px;
+    height: 46px;
+    width: 46px;
+    margin-top: -15px;
+    padding-left: 3px;
   }
 
   .voltorbs-item {
-    margin-top: -7px;
-    margin-right: -2px;
+    margin-top: -10px;
+    margin-right: -3px;
   }
 </style>

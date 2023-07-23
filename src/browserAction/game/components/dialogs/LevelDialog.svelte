@@ -50,16 +50,16 @@
 
 <style>
   dialog {
-    border: 2px solid #f8d868;
-    outline: 4px solid #484040;
-    border-radius: 3px;
+    border: 3px solid #f8d868;
+    outline: 6px solid #484040;
+    border-radius: 4px;
     background-color: #606068;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 8px;
-    padding-right: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 3px;
 
-    margin-bottom: 50px;
+    margin-bottom: 75px;
   }
 
   .container {
@@ -69,8 +69,8 @@
   .dialog-content {
     background-color: #f8f8f8;
     border: 1px solid #f8f8f8;
-    border-radius: 2px;
-    margin-right: 10px;
+    border-radius: 3px;
+    margin-right: 15px;
   }
 
   @font-face {
@@ -78,14 +78,14 @@
     src: url(/assets/fonts/pokemon-ds-font.ttf);
   }
   .dialog-text {
-    width: 400px;
-    height: 60px;
+    width: 600px;
+    height: 90px;
     display: block;
     appearance: none;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8;
     background-color: #f8f8f8;
-    font-size: 28px;
+    font-size: 42px;
     border: 0px;
     outline: 0px;
     resize: none;

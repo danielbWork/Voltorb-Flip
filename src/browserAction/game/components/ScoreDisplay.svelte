@@ -29,13 +29,13 @@
 
   .title {
     background-color: #f8f8f8;
-    outline: 2px solid #404040;
-    border: 4px solid #a0c0b0;
+    outline: 3px solid #404040;
+    border: 6px solid #a0c0b0;
     color: #404040;
-    border-radius: 3px;
-    margin-right: 6px;
-    padding: 4px;
-    font-size: 22px;
+    border-radius: 4px;
+    margin-right: 9px;
+    padding: 6px;
+    font-size: 33px;
 
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
     font-family: pokemon;
@@ -45,11 +45,12 @@
     font-family: score;
     text-shadow: 1px 1px #a5c6b5, -1px 1px #a5c6b5, 1px -1px #a5c6b5,
       -1px -1px #a5c6b5;
-    font-size: 18px;
+    font-size: 27px;
   }
 
   .container {
-    padding-top: 15px;
-    padding-left: 20px;
+    padding-top: 22px;
+    padding-left: 30px;
+    width: max-content;
   }
 </style>

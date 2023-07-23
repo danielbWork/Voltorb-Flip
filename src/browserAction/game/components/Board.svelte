@@ -58,13 +58,13 @@
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     gap: 0px;
-    padding: 30px;
+    padding: 45px;
   }
 
   .memo-button {
-    margin-top: -8px;
-    margin-left: -2px;
-    width: 60px;
-    height: 64px;
+    margin-top: -12px;
+    margin-left: -3px;
+    width: 90px;
+    height: 96px;
   }
 </style>

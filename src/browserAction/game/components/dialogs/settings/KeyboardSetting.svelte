@@ -34,20 +34,20 @@
 
   span {
     font-family: pokemon;
-    padding: 4px;
-    font-size: 22px;
+    padding: 6px;
+    font-size: 33px;
     text-align: center;
-    margin: 4px;
+    margin: 6px;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
   }
 
   .value {
-    padding: 3px;
-    margin-top: 2px;
-    border-top: #505058 solid 2px;
-    border-bottom: #505058 solid 8px;
-    border-right: #202023 solid 4px;
-    border-left: #202023 solid 4px;
+    padding: 4px;
+    margin-top: 3px;
+    border-top: #505058 solid 3px;
+    border-bottom: #505058 solid 12px;
+    border-right: #202023 solid 6px;
+    border-left: #202023 solid 6px;
   }
 </style>

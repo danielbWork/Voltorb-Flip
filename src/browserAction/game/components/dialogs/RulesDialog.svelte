@@ -59,13 +59,17 @@
     font-family: pokemon;
     src: url(/assets/fonts/pokemon-ds-font.ttf);
   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
   span {
     font-family: pokemon;
-    padding: 4px;
-    font-size: 22px;
+    padding: 6px;
+    font-size: 33px;
     text-align: center;
-    margin: 4px;
+    margin: 6px;
     color: #f7f7f7;
     text-shadow: 1px 0px #373737, 0px 1px #373737, -1px 0px #373737,
       0px -1px #373737;
