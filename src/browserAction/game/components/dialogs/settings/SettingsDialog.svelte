@@ -76,7 +76,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef}>
   <span>Settings</span>
-  <div class="container" class:container-popup={!$isInTab}>
+  <div class="settings-container" class:settings-container-popup={!$isInTab}>
     <div>
       <!-- TODO add shiny charm code here -->
     </div>
@@ -90,7 +90,6 @@
       }}
     />
   </div>
-
   {#if !$isInTab}
     <button
       on:click={() => {
@@ -103,6 +102,18 @@
       }}>Open in a webpage</button
     >
   {/if}
+  <div class="info-container">
+    <div class="info-container-inner">
+      <div class="info-container-content">
+        <textarea
+          readonly
+          class="info-container-text"
+          class:info-container-text-popup={!$isInTab}
+          value={"test"}
+        />
+      </div>
+    </div>
+  </div>
 
   <UpdateKeybindingDialog bind:this={updateModal} value={updateValue} />
 </dialog>
@@ -117,7 +128,7 @@
     padding: 3px;
   }
 
-  .container {
+  .settings-container {
     width: 600px;
     height: 450px;
     display: flex;
@@ -131,7 +142,7 @@
   }
 
   /* For pop up display specifically */
-  .container-popup {
+  .settings-container-popup {
     width: 450px;
     height: 400px;
   }
@@ -149,6 +160,55 @@
     margin: 6px;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
+  }
+
+  .info-container {
+    border: 3px solid #f8d868;
+    outline: 6px solid #484040;
+    border-radius: 4px;
+    background-color: #606068;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 3px;
+    margin-top: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+  }
+
+  .info-container-inner {
+    display: flex;
+  }
+
+  .info-container-content {
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    border-radius: 3px;
+    margin-right: 15px;
+  }
+
+  .info-container-text {
+    width: 520px;
+    height: 90px;
+    display: block;
+    appearance: none;
+    color: #505058;
+    text-shadow: 1px 1px #a0a0a8;
+    background-color: #f8f8f8;
+    font-size: 38px;
+    border: 0px;
+    outline: 0px;
+    resize: none;
+    line-height: 1;
+    font-family: pokemon;
+    text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
+  }
+
+  .info-container-text-popup {
+    width: 370px;
+    height: 60px;
+    font-size: 28px;
   }
 
   /* TODO change names */

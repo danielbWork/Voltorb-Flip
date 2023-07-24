@@ -1,5 +1,5 @@
 <script>
-  import { isDialogOpen } from "../../stores";
+  import { isDialogOpen, isInTab } from "../../stores";
 
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
@@ -43,7 +43,12 @@
 <dialog bind:this={dialogRef} on:click={hide}>
   <div class="container">
     <div class="dialog-content">
-      <textarea readonly class="dialog-text" value={text} />
+      <textarea
+        readonly
+        class="dialog-text"
+        class:dialog-text-popup={!$isInTab}
+        value={text}
+      />
     </div>
   </div>
 </dialog>
@@ -92,5 +97,11 @@
     line-height: 1;
     font-family: pokemon;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
+  }
+
+  .dialog-text-popup {
+    width: 450px;
+    height: 60px;
+    font-size: 28px;
   }
 </style>
