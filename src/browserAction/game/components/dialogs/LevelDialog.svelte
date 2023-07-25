@@ -83,14 +83,14 @@
     src: url(/assets/fonts/pokemon-ds-font.ttf);
   }
   .dialog-text {
-    width: 600px;
+    width: 650px;
     height: 90px;
     display: block;
     appearance: none;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8;
     background-color: #f8f8f8;
-    font-size: 42px;
+    font-size: 40px;
     border: 0px;
     outline: 0px;
     resize: none;

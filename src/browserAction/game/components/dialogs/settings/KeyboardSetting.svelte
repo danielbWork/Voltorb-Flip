@@ -7,11 +7,16 @@
    * @type {string} The value of the setting
    */
   export let value;
+
+  /**
+   * Whether or not the setting is the selected one or not
+   */
+  export let selected = false;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="container" on:click>
-  <span>{title}:</span>
+  <span class:selected-title={selected}>{title}</span>
   <!-- Maybe surround in box or something -->
   <div class="value">
     <span>{value}</span>
@@ -49,5 +54,15 @@
     border-bottom: #505058 solid 12px;
     border-right: #202023 solid 6px;
     border-left: #202023 solid 6px;
+  }
+
+  .selected-title {
+    color: #c07800;
+    text-shadow: 1px 1px #f8b050, 1px 0px #f8b050, 0px 1px #f8b050;
+  }
+
+  .error-value {
+    color: #f83018;
+    text-shadow: 1px 1px #f88880, 1px 0px #f88880, 0px 1px #f88880;
   }
 </style>

@@ -6,7 +6,15 @@
    */
   let dialogRef;
 
+  /**
+   * @type {string} The value of the character the user wants to update
+   */
   export let value;
+
+  /**
+   * @type {(string)=>string} A parser for the key values
+   */
+  export let parser;
 
   /**
    * Opens the dialog to be displayed
@@ -33,10 +41,20 @@
     return value;
   }
 
+  /**
+   * Handles user selecting the key
+   * @param event The keyboard press
+   */
   async function onKeySelect(event) {
     const key = event.key;
 
-    value = key;
+    // Close on escape
+    if (key === "Escape") {
+      hide();
+      return;
+    }
+
+    value = parser(key);
 
     await delay(200);
 

@@ -40,11 +40,50 @@
   }
 
   /**
+   * Parses the value to be displayed properly if it's something like an arrow or space
+   * @param {string} value The value we parse
+   * @returns {string} The updated icon for the value or just value it self if no change was needed
+   */
+  function parseValue(value) {
+    let newValue;
+
+    switch (value) {
+      case "ArrowUp":
+        newValue = "\u2191";
+        break;
+
+      case "ArrowDown":
+        newValue = "\u2193";
+        break;
+      case "ArrowLeft":
+        newValue = "\u2190";
+        break;
+      case "ArrowRight":
+        newValue = "\u2192";
+        break;
+
+      case " ":
+        newValue = "_";
+        break;
+
+      case "Control":
+        newValue = "ctrl";
+        break;
+
+      default:
+        newValue = value;
+        break;
+    }
+
+    return newValue;
+  }
+
+  /**
    * Reacts to user selecting a key binding to update
    * @param action The action the user wants to update
    */
   async function handleKeybindingSelect(action) {
-    updateValue = keybindings[action];
+    updateValue = parseValue(keybindings[action]);
 
     // Updates inner dialog
     await delay(200);
@@ -83,7 +122,7 @@
     <span>Keybindings:</span>
     <KeyboardSetting
       title="Toggle Memo"
-      value={keybindings.toggleMemo}
+      value={parseValue(keybindings.toggleMemo)}
       on:click={() => {
         // TODO maybe find some better way of doing this
         handleKeybindingSelect("toggleMemo");
@@ -115,7 +154,11 @@
     </div>
   </div>
 
-  <UpdateKeybindingDialog bind:this={updateModal} value={updateValue} />
+  <UpdateKeybindingDialog
+    bind:this={updateModal}
+    value={updateValue}
+    parser={parseValue}
+  />
 </dialog>
 
 <!-- TODO Add page button -->
@@ -209,16 +252,5 @@
     width: 370px;
     height: 60px;
     font-size: 28px;
-  }
-
-  /* TODO change names */
-  .selected {
-    color: #c07800;
-    text-shadow: 1px 1px #f8b050, 1px 0px #f8b050, 0px 1px #f8b050;
-  }
-
-  .selected2 {
-    color: #f83018;
-    text-shadow: 1px 1px #f88880, 1px 0px #f88880, 0px 1px #f88880;
   }
 </style>
