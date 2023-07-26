@@ -12,6 +12,11 @@
    * Whether or not the setting is the selected one or not
    */
   export let selected = false;
+
+  /**
+   * Whether or not the current value causes an error
+   */
+  export let error = false;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -19,7 +24,7 @@
   <span class:selected-title={selected}>{title}</span>
   <!-- Maybe surround in box or something -->
   <div class="value">
-    <span>{value}</span>
+    <span class:value-error={error}>{value}</span>
   </div>
 </div>
 
@@ -49,6 +54,7 @@
 
   .value {
     padding: 4px;
+    font-size: 28px;
     margin-top: 3px;
     border-top: #505058 solid 3px;
     border-bottom: #505058 solid 12px;
@@ -61,7 +67,7 @@
     text-shadow: 1px 1px #f8b050, 1px 0px #f8b050, 0px 1px #f8b050;
   }
 
-  .error-value {
+  .value-error {
     color: #f83018;
     text-shadow: 1px 1px #f88880, 1px 0px #f88880, 0px 1px #f88880;
   }

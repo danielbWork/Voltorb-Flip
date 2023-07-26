@@ -63,7 +63,7 @@
         break;
 
       case " ":
-        newValue = "_";
+        newValue = "␣";
         break;
 
       case "Control":
