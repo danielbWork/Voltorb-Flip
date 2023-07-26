@@ -54,12 +54,15 @@
 
   .value {
     padding: 4px;
-    font-size: 28px;
     margin-top: 3px;
     border-top: #505058 solid 3px;
     border-bottom: #505058 solid 12px;
     border-right: #202023 solid 6px;
     border-left: #202023 solid 6px;
+  }
+
+  .value > span {
+    font-size: 28px;
   }
 
   .selected-title {
