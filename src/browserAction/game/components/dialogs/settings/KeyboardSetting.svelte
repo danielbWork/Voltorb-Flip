@@ -53,10 +53,10 @@
   }
 
   .value {
-    padding: 4px;
+    padding: 2px;
     margin-top: 3px;
     border-top: #505058 solid 3px;
-    border-bottom: #505058 solid 12px;
+    border-bottom: #505058 solid 10px;
     border-right: #202023 solid 6px;
     border-left: #202023 solid 6px;
   }
