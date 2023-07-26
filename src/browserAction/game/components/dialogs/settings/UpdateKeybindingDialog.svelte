@@ -54,7 +54,7 @@
       return;
     }
 
-    value = parser(key);
+    value = key;
 
     await delay(200);
 
@@ -69,7 +69,7 @@
   <div class="container">
     <span>Please select a new keybinding:</span>
 
-    <span>{value}</span>
+    <span>{parser(value)}</span>
   </div>
 </dialog>
 

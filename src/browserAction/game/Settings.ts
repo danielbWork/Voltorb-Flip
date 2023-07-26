@@ -10,18 +10,14 @@ export const defaultSettings = {
   keybindings: {
     toggleMemo: "x",
     flipSquare: " ",
-    memos: {
-      voltorb: "`",
-      one: "1",
-      two: "2",
-      three: "3",
-    },
-    movement: {
-      up: "ArrowUp",
-      down: "ArrowDown",
-      left: "ArrowLeft",
-      right: "ArrowRight",
-    },
+    voltorbMemo: "`",
+    oneMemo: "1",
+    twoMemo: "2",
+    threeMemo: "3",
+    moveUp: "ArrowUp",
+    moveDown: "ArrowDown",
+    moveLeft: "ArrowLeft",
+    moveRight: "ArrowRight",
   },
 };
 

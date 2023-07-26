@@ -70,6 +70,10 @@
         newValue = "ctrl";
         break;
 
+      case "Enter":
+        newValue = "⏎";
+        break;
+
       default:
         newValue = value;
         break;
@@ -119,15 +123,24 @@
     <div>
       <!-- TODO add shiny charm code here -->
     </div>
-    <span>Keybindings:</span>
-    <KeyboardSetting
-      title="Toggle Memo"
-      value={parseValue(keybindings.toggleMemo)}
-      on:click={() => {
-        // TODO maybe find some better way of doing this
-        handleKeybindingSelect("toggleMemo");
-      }}
-    />
+
+    <div class="keybindings-container">
+      <span class="keybindings-title">Keybindings:</span>
+
+      <!-- TODO Create paeser file as this needs to be parsed for various values -->
+      {#each Object.entries(keybindings) as [key, value]}
+        {#if typeof value === "string"}
+          <KeyboardSetting
+            title="Toggle Memo"
+            value={parseValue(value)}
+            on:click={() => {
+              // TODO maybe find some better way of doing this
+              handleKeybindingSelect(key);
+            }}
+          />
+        {/if}
+      {/each}
+    </div>
   </div>
   {#if !$isInTab}
     <button
@@ -188,6 +201,24 @@
   .settings-container-popup {
     width: 450px;
     height: 400px;
+  }
+
+  .keybindings-container {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    margin-top: 30px;
+  }
+
+  .keybindings-title {
+    position: sticky;
+    top: 0;
+    margin-left: 20px;
+    text-align: start;
+    margin-top: 0px;
+    background-color: rgb(248, 248, 248);
+    border-bottom: 4px solid #505058;
   }
 
   @font-face {

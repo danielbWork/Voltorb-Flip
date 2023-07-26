@@ -21,7 +21,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="container" on:click>
-  <span class:selected-title={selected}>{title}</span>
+  <span class="title" class:selected-title={selected}>{title}</span>
   <!-- Maybe surround in box or something -->
   <div class="value">
     <span class:value-error={error}>{value}</span>
@@ -32,9 +32,10 @@
   .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     width: inherit;
-    gap: 40%;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    gap: 45%;
   }
 
   @font-face {
@@ -44,12 +45,16 @@
 
   span {
     font-family: pokemon;
-    padding: 6px;
+    padding: 4px;
     font-size: 33px;
     text-align: center;
     margin: 6px;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
+  }
+
+  .title {
+    margin-left: 50px;
   }
 
   .value {

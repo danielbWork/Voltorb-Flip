@@ -29,15 +29,6 @@
 
     let isUsed = false;
 
-    // TODO  enable keybind selection
-    if (Object.values(keybindings.movement).includes(key)) {
-      isUsed = handleArrowClick(key);
-    }
-
-    if (Object.values(keybindings.memos).includes(key)) {
-      isUsed = handleNumberKey(key) || isUsed;
-    }
-
     switch (key) {
       case keybindings.flipSquare:
         isUsed = true;
@@ -55,7 +46,13 @@
         break;
     }
 
-    //TODO still needs some fixes
+    if (!isUsed) {
+      isUsed = handleArrowClick(key);
+    }
+
+    if (!isUsed) {
+      isUsed = handleNumberKey(key);
+    }
 
     // If key is one of ours prevents code
     if (isUsed) {
@@ -71,28 +68,28 @@
   function handleArrowClick(key) {
     let { row, col } = $selectedId;
 
-    const keybindings = $settings.keybindings.movement;
+    const keybindings = $settings.keybindings;
 
     switch (key) {
-      case keybindings.up:
+      case keybindings.moveUp:
         row--;
 
         if (row < 0) row = 4;
 
         break;
-      case keybindings.down:
+      case keybindings.moveDown:
         row++;
 
         if (row > 4) row = 0;
 
         break;
-      case keybindings.left:
+      case keybindings.moveLeft:
         col--;
 
         if (col < 0) col = 4;
 
         break;
-      case keybindings.right:
+      case keybindings.moveRight:
         col++;
 
         if (col > 4) col = 0;
@@ -115,22 +112,22 @@
    */
   function handleNumberKey(key) {
     const memos = $selectedSquare.memos;
-    const keybindings = $settings.keybindings.memos;
+    const keybindings = $settings.keybindings;
 
     switch (key) {
-      case keybindings.voltorb:
+      case keybindings.voltorbMemo:
         memos[0] = !memos[0];
         break;
 
-      case keybindings.one:
+      case keybindings.oneMemo:
         memos[1] = !memos[1];
         break;
 
-      case keybindings.two:
+      case keybindings.twoMemo:
         memos[2] = !memos[2];
         break;
 
-      case keybindings.three:
+      case keybindings.threeMemo:
         memos[3] = !memos[3];
         break;
 
