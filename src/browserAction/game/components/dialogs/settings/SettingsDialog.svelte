@@ -57,17 +57,23 @@
     }
 
     let tempSettings = { ...$settings };
+
+    const currentValueBinding = Object.entries(tempSettings.keybindings).find(
+      ([key, value]) => {
+        return key !== action && value === updateModal.getValue();
+      }
+    );
+
+    // Replaces the current binding holder with the old value of this action
+    if (currentValueBinding) {
+      tempSettings["keybindings"][currentValueBinding[0]] = keybindings[action];
+    }
+
     tempSettings["keybindings"][action] = updateModal.getValue();
 
-    console.log(tempSettings);
-
     $settings = tempSettings;
-
-    console.log($settings);
-
     updateValue = undefined;
 
-    // TODO Add replace logic here
     hide();
   }
 </script>
