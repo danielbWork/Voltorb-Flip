@@ -1,7 +1,4 @@
-<!-- TODO move dialogs here -->
-
 <script>
-  import { bind } from "svelte/internal";
   import { isDialogOpen } from "../../stores";
   import LevelDialog from "./LevelDialog.svelte";
   import RulesDialog from "./RulesDialog.svelte";

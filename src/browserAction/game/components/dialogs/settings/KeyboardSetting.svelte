@@ -7,24 +7,13 @@
    * @type {string} The value of the setting
    */
   export let value;
-
-  /**
-   * Whether or not the setting is the selected one or not
-   */
-  export let selected = false;
-
-  /**
-   * Whether or not the current value causes an error
-   */
-  export let error = false;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="container" on:click>
-  <span class="title" class:selected-title={selected}>{title}</span>
-  <!-- Maybe surround in box or something -->
+  <span class="title">{title}</span>
   <div class="value">
-    <span class:value-error={error}>{value}</span>
+    <span>{value}</span>
   </div>
 </div>
 
@@ -35,7 +24,7 @@
     width: inherit;
     margin-top: 8px;
     margin-bottom: 4px;
-    gap: 45%;
+    gap: 35%;
   }
 
   @font-face {
@@ -54,12 +43,17 @@
   }
 
   .title {
-    margin-left: 50px;
+    margin-left: 40px;
+    width: 200px;
+    text-align: start;
   }
 
   .value {
     padding: 2px;
     margin-top: 3px;
+    min-width: 42px;
+    min-height: 40px;
+    text-align: center;
     border-top: #505058 solid 3px;
     border-bottom: #505058 solid 10px;
     border-right: #202023 solid 6px;
@@ -67,16 +61,6 @@
   }
 
   .value > span {
-    font-size: 28px;
-  }
-
-  .selected-title {
-    color: #c07800;
-    text-shadow: 1px 1px #f8b050, 1px 0px #f8b050, 0px 1px #f8b050;
-  }
-
-  .value-error {
-    color: #f83018;
-    text-shadow: 1px 1px #f88880, 1px 0px #f88880, 0px 1px #f88880;
+    font-size: 30px;
   }
 </style>

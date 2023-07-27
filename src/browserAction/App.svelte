@@ -4,10 +4,6 @@
   import { browserAction, tabs } from "webextension-polyfill";
   import { isInTab } from "./game/stores";
 
-  // TODO update all pixal values by 1.5 since zoom api sucks
-
-  // export let isPopup;
-
   onMount(async () => {
     if ($isInTab) {
       const tab = (await tabs.query({ active: true }))[0];

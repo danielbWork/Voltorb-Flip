@@ -5,6 +5,7 @@
   import KeyboardSetting from "./KeyboardSetting.svelte";
   import UpdateKeybindingDialog from "./UpdateKeybindingDialog.svelte";
   import { delay } from "../../../../utils";
+  import { parseTitle, parseValue } from "./KeybindingsParser";
 
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
@@ -40,49 +41,6 @@
   }
 
   /**
-   * Parses the value to be displayed properly if it's something like an arrow or space
-   * @param {string} value The value we parse
-   * @returns {string} The updated icon for the value or just value it self if no change was needed
-   */
-  function parseValue(value) {
-    let newValue;
-
-    switch (value) {
-      case "ArrowUp":
-        newValue = "\u2191";
-        break;
-
-      case "ArrowDown":
-        newValue = "\u2193";
-        break;
-      case "ArrowLeft":
-        newValue = "\u2190";
-        break;
-      case "ArrowRight":
-        newValue = "\u2192";
-        break;
-
-      case " ":
-        newValue = "␣";
-        break;
-
-      case "Control":
-        newValue = "ctrl";
-        break;
-
-      case "Enter":
-        newValue = "⏎";
-        break;
-
-      default:
-        newValue = value;
-        break;
-    }
-
-    return newValue;
-  }
-
-  /**
    * Reacts to user selecting a key binding to update
    * @param action The action the user wants to update
    */
@@ -109,13 +67,12 @@
 
     updateValue = undefined;
 
-    // TODO add apply logic here instead
+    // TODO Add replace logic here
     hide();
   }
-
-  // TODO update ui
 </script>
 
+<!-- TODO add close button maybe other close buttons -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef}>
   <span>Settings</span>
@@ -127,18 +84,14 @@
     <div class="keybindings-container">
       <span class="keybindings-title">Keybindings:</span>
 
-      <!-- TODO Create paeser file as this needs to be parsed for various values -->
       {#each Object.entries(keybindings) as [key, value]}
-        {#if typeof value === "string"}
-          <KeyboardSetting
-            title="Toggle Memo"
-            value={parseValue(value)}
-            on:click={() => {
-              // TODO maybe find some better way of doing this
-              handleKeybindingSelect(key);
-            }}
-          />
-        {/if}
+        <KeyboardSetting
+          title={parseTitle(key)}
+          value={parseValue(value)}
+          on:click={() => {
+            handleKeybindingSelect(key);
+          }}
+        />
       {/each}
     </div>
   </div>
@@ -154,27 +107,8 @@
       }}>Open in a webpage</button
     >
   {/if}
-  <div class="info-container">
-    <div class="info-container-inner">
-      <div class="info-container-content">
-        <textarea
-          readonly
-          class="info-container-text"
-          class:info-container-text-popup={!$isInTab}
-          value={"test"}
-        />
-      </div>
-    </div>
-  </div>
-
-  <UpdateKeybindingDialog
-    bind:this={updateModal}
-    value={updateValue}
-    parser={parseValue}
-  />
+  <UpdateKeybindingDialog bind:this={updateModal} value={updateValue} />
 </dialog>
-
-<!-- TODO Add page button -->
 
 <style>
   dialog {
@@ -234,54 +168,5 @@
     margin: 6px;
     color: #505058;
     text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
-  }
-
-  .info-container {
-    border: 3px solid #f8d868;
-    outline: 6px solid #484040;
-    border-radius: 4px;
-    background-color: #606068;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 12px;
-    padding-right: 3px;
-    margin-top: 16px;
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-bottom: 4px;
-  }
-
-  .info-container-inner {
-    display: flex;
-  }
-
-  .info-container-content {
-    background-color: #f8f8f8;
-    border: 1px solid #f8f8f8;
-    border-radius: 3px;
-    margin-right: 15px;
-  }
-
-  .info-container-text {
-    width: 520px;
-    height: 90px;
-    display: block;
-    appearance: none;
-    color: #505058;
-    text-shadow: 1px 1px #a0a0a8;
-    background-color: #f8f8f8;
-    font-size: 38px;
-    border: 0px;
-    outline: 0px;
-    resize: none;
-    line-height: 1;
-    font-family: pokemon;
-    text-shadow: 1px 1px #a0a0a8, 1px 0px #a0a0a8, 0px 1px #a0a0a8;
-  }
-
-  .info-container-text-popup {
-    width: 370px;
-    height: 60px;
-    font-size: 28px;
   }
 </style>

@@ -1,5 +1,6 @@
 <script>
   import { delay } from "../../../../utils";
+  import { parseValue } from "./KeybindingsParser";
 
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
@@ -10,11 +11,6 @@
    * @type {string} The value of the character the user wants to update
    */
   export let value;
-
-  /**
-   * @type {(string)=>string} A parser for the key values
-   */
-  export let parser;
 
   /**
    * Opens the dialog to be displayed
@@ -69,7 +65,7 @@
   <div class="container">
     <span>Please select a new keybinding:</span>
 
-    <span>{parser(value)}</span>
+    <span>{parseValue(value)}</span>
   </div>
 </dialog>
 
