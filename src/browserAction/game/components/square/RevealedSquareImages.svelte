@@ -10,7 +10,6 @@
   export let hasExploded;
 </script>
 
-<!-- TODO maybe choose better images -->
 {#if value === -1}
   <div class="voltorb-parent">
     {#if hasExploded}

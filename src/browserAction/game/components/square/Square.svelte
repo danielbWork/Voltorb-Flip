@@ -45,8 +45,6 @@
   }
 </script>
 
-<!-- TODO Create better quality versions of current pictures as they look bad-->
-
 <div class="grided-square">
   <div
     class="flip-box"
