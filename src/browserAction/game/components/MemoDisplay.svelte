@@ -1,6 +1,6 @@
 <script>
   import { fly } from "svelte/transition";
-  import { isMemoOpen, game, selectedSquare } from "../stores";
+  import { isMemoOpen, game, selectedSquare, isInTab } from "../stores";
 
   $: memos = $selectedSquare.isHidden
     ? $selectedSquare.memos
@@ -31,7 +31,11 @@
 </script>
 
 {#if $isMemoOpen}
-  <div class="container" transition:fly={{ x: 50, duration: 500 }}>
+  <div
+    class="container"
+    class:container-popup={!$isInTab}
+    transition:fly={{ x: 50, duration: 500 }}
+  >
     {#each memos as memo, index}
       <input
         type="checkbox"
@@ -58,6 +62,12 @@
     grid-template-columns: auto auto;
     gap: 0px;
     padding: 3px;
+  }
+
+  .container-popup {
+    min-height: 102px;
+    min-width: 102px;
+    margin-right: -176px;
   }
 
   input[type="checkbox"] {
