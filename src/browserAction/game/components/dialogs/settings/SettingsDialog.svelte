@@ -6,6 +6,7 @@
   import UpdateKeybindingDialog from "./UpdateKeybindingDialog.svelte";
   import { delay } from "../../../../utils";
   import { parseTitle, parseValue } from "./KeybindingsParser";
+  import ShinyCharmSetting from "./ShinyCharmSetting.svelte";
 
   /**
    * @type {HTMLDialogElement} Reference to the dialog to be used
@@ -87,7 +88,6 @@
   }
 </script>
 
-<!-- TODO add close button maybe other close buttons -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef}>
   <div>
@@ -108,10 +108,7 @@
     />
   </div>
   <div class="settings-container" class:settings-container-popup={!$isInTab}>
-    <div>
-      <!-- TODO add shiny charm code here -->
-    </div>
-
+    <ShinyCharmSetting />
     <div class="keybindings-container">
       <span class="keybindings-title">Keybindings:</span>
 
@@ -193,7 +190,6 @@
     background-color: rgb(248, 248, 248);
     border-bottom: 4px solid #505058;
   }
-  /* width: 100%; */
 
   @font-face {
     font-family: pokemon;
