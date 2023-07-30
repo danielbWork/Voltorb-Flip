@@ -30,8 +30,10 @@
    * Closes the dialog
    */
   export function hide() {
-    $isDialogOpen = false;
-    dialogRef.close();
+    if (isOpen()) {
+      $isDialogOpen = false;
+      dialogRef.close();
+    }
   }
 
   /**
