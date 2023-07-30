@@ -73,15 +73,40 @@
 
     $settings = tempSettings;
     updateValue = undefined;
+  }
 
-    hide();
+  /**
+   * Opens the game inside a new tab and closes the popup
+   */
+  function openInTab() {
+    tabs
+      .create({ url: "src/browserAction/index.html", active: true })
+      .then((tab) => {
+        window.close();
+      });
   }
 </script>
 
 <!-- TODO add close button maybe other close buttons -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog bind:this={dialogRef}>
-  <span>Settings</span>
+  <div>
+    <span>Settings</span>
+    {#if !$isInTab}
+      <img
+        class="open-tab"
+        src="/assets/icons/new_tab_icon.svg"
+        alt="open in tab"
+        on:click={openInTab}
+      />
+    {/if}
+    <img
+      class="close"
+      src="/assets/icons/close_icon.svg"
+      alt="close"
+      on:click={hide}
+    />
+  </div>
   <div class="settings-container" class:settings-container-popup={!$isInTab}>
     <div>
       <!-- TODO add shiny charm code here -->
@@ -101,18 +126,7 @@
       {/each}
     </div>
   </div>
-  {#if !$isInTab}
-    <button
-      on:click={() => {
-        //TODO clean this up  and maybe move this button
-        tabs
-          .create({ url: "src/browserAction/index.html", active: true })
-          .then((tab) => {
-            window.close();
-          });
-      }}>Open in a webpage</button
-    >
-  {/if}
+
   <UpdateKeybindingDialog bind:this={updateModal} value={updateValue} />
 </dialog>
 
@@ -122,6 +136,23 @@
     border: 1px solid #c0c8d0;
     border-radius: 3px;
     padding: 3px;
+  }
+
+  .open-tab {
+    margin-bottom: -4px;
+    margin-left: -8px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    padding: 2px;
+    padding-top: 4px;
   }
 
   .settings-container {
@@ -145,10 +176,12 @@
 
   .keybindings-container {
     overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     width: inherit;
     margin-top: 30px;
+    margin-bottom: 10px;
   }
 
   .keybindings-title {
@@ -160,6 +193,7 @@
     background-color: rgb(248, 248, 248);
     border-bottom: 4px solid #505058;
   }
+  /* width: 100%; */
 
   @font-face {
     font-family: pokemon;

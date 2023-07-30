@@ -1,4 +1,6 @@
 <script>
+  import { isInTab } from "../../../stores";
+
   /**
    * @type {string} The title of the setting
    */
@@ -10,7 +12,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="container" on:click>
+<div class="container" class:container-popup={!$isInTab} on:click>
   <span class="title">{title}</span>
   <div class="value">
     <span>{value}</span>
@@ -25,6 +27,10 @@
     margin-top: 8px;
     margin-bottom: 4px;
     gap: 35%;
+  }
+
+  .container-popup {
+    gap: 10%;
   }
 
   @font-face {

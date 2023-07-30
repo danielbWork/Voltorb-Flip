@@ -31,8 +31,10 @@
 
 <svelte:window
   on:keydown={(e) => {
-    e.preventDefault();
-    hide();
+    if (isOpen()) {
+      e.preventDefault();
+      hide();
+    }
   }}
 />
 

@@ -42,6 +42,10 @@ export const selectedSquare = derived(
  */
 export const isDialogOpen = writable(false);
 
+isDialogOpen.subscribe((value) => {
+  console.log(value);
+});
+
 /**
  * Used to determine if running in a tab or popup
  */
