@@ -1,3 +1,4 @@
+import { delay } from "browserAction/utils";
 import { writable } from "svelte/store";
 import { storage } from "webextension-polyfill";
 
@@ -6,7 +7,7 @@ import { storage } from "webextension-polyfill";
  */
 export const defaultSettings = {
   hasBeatenLastLevel: false,
-  usingShinyBell: false,
+  usingShinyCharm: false,
   keybindings: {
     toggleMemo: "x",
     flipSquare: " ",
@@ -28,7 +29,7 @@ function createSettings() {
   const { subscribe, set } = writable<Record<string, any>>(defaultSettings);
 
   storage.local.get().then((value) => {
-    // Initializes settings
+    // Checks if settings have been initialized already
     if (!value?.keybindings) {
       storage.local.set(defaultSettings);
       return;

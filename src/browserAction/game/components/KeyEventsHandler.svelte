@@ -21,7 +21,6 @@
    * @param event The keyboard event mainly used for the key value
    */
   function handleOnKeydown(event) {
-    console.log($isDialogOpen);
     if (ignoreOnKeyDown || $isDialogOpen) return;
 
     const keybindings = $settings.keybindings;

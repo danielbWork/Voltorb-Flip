@@ -8,6 +8,11 @@ import { GameManager } from "./GameManager";
 export const hasFinishedLevel = writable(false);
 
 /**
+ * Marks when the level is changing making sure all squares are hidden
+ */
+export const isChangingLevels = writable(false);
+
+/**
  * Whether or not in memo mode or not
  */
 export const isMemoOpen = writable(false);

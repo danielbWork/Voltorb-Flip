@@ -1,4 +1,6 @@
+import { get } from "svelte/store";
 import { getLevelInfo } from "./LevelInfo";
+import { settings } from "./Settings";
 import { BoardSquare, LineSum, SquareId } from "./types";
 /**
  * Manages the game state and board
@@ -43,9 +45,7 @@ export class GameManager {
    */
   colSums: LineSum[] = [];
 
-  constructor() {
-    this.updateToLevel(0);
-  }
+  constructor() {}
 
   /**
    *  Updates the level for the board
@@ -54,8 +54,6 @@ export class GameManager {
    */
   updateLevel(wasSuccessful: boolean) {
     if (wasSuccessful) {
-      // TODO Unlock shiny bell charm after first beating of level 8
-
       // 7 since we have 8 difficulty levels and starts at 0
       this.updateToLevel(Math.min(this.level + 1, 7));
     } else {
@@ -142,7 +140,7 @@ export class GameManager {
         let value = removedRandomItemArray[0];
 
         // Shiny check
-        if (value === 0 && Math.random() * 8192 === 0) {
+        if (value === 0 && this.calculateIsShiny()) {
           value = -1;
         }
 
@@ -157,6 +155,26 @@ export class GameManager {
     }
 
     return board;
+  }
+
+  /**
+   * Calculates if this should be a shiny voltorb
+   * @returns Whether or not the voltorb should be shiny
+   */
+  private calculateIsShiny(): boolean {
+    const checksCount = get(settings).usingShinyCharm ? 3 : 1;
+
+    for (let index = 0; index < checksCount; index++) {
+      // Odds from 0-8191
+      const result = Math.floor(Math.random() * 8192);
+
+      // Checks for 100 since its voltorb's dex number
+      if (result === 100) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**

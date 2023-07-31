@@ -2,7 +2,8 @@
   import { onMount } from "svelte";
   import Game from "./game/components/Game.svelte";
   import { browserAction, tabs } from "webextension-polyfill";
-  import { isInTab } from "./game/stores";
+  import { game, isInTab } from "./game/stores";
+  import { delay } from "./utils";
 
   onMount(async () => {
     if ($isInTab) {
@@ -11,10 +12,21 @@
       tabs.setZoom(1);
     }
   });
+
+  /**
+   * Loads the game after some delay to make sure settings have been loaded
+   */
+  async function loadGame() {
+    await delay(100);
+    $game.updateLevel(false);
+    return;
+  }
 </script>
 
 <div class:popup={!$isInTab}>
-  <Game />
+  {#await loadGame() then}
+    <Game />
+  {/await}
 </div>
 
 <!-- TODO Mention the following: Thefontsmagazine.com, https://www.1001fonts.com/,

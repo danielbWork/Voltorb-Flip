@@ -111,7 +111,10 @@
   </div>
   <div class="settings-container" class:settings-container-popup={!$isInTab}>
     <ShinyCharmSetting />
-    <div class="keybindings-container">
+    <div
+      class="keybindings-container"
+      class:keybindings-container-no-shiny-bell={!$settings.hasBeatenLastLevel}
+    >
       <span class="keybindings-title">Keybindings:</span>
 
       {#each Object.entries(keybindings) as [key, value]}
@@ -179,8 +182,12 @@
     display: flex;
     flex-direction: column;
     width: inherit;
-    margin-top: 30px;
+
     margin-bottom: 10px;
+  }
+
+  .keybindings-container-no-shiny-bell {
+    margin-top: 30px;
   }
 
   .keybindings-title {

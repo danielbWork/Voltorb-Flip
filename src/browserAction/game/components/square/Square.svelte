@@ -4,6 +4,7 @@
   import RevealedSquareImage from "./RevealedSquareImages.svelte";
   import {
     hasFinishedLevel,
+    isChangingLevels,
     isExploding,
     isInTab,
     isMemoOpen,
@@ -53,7 +54,8 @@
   >
     <div
       class="flip-box-inner"
-      class:flip-it={!square.isHidden || $hasFinishedLevel}
+      class:flip-it={(!square.isHidden || $hasFinishedLevel) &&
+        !$isChangingLevels}
       class:flip-box-inner-selected={selected}
       class:flip-box-inner-selected-memo={selected && $isMemoOpen}
     >

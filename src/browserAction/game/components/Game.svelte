@@ -1,9 +1,9 @@
 <script>
   import {
     hasFinishedLevel,
+    isChangingLevels,
     isDialogOpen,
     isExploding,
-    selectedSquare,
   } from "../stores";
   import Board from "./Board.svelte";
   import MemoDisplay from "./MemoDisplay.svelte";
@@ -13,6 +13,7 @@
   import KeyEventsHandler from "./KeyEventsHandler.svelte";
   import DialogHandler from "./dialogs/DialogHandler.svelte";
   import { delay } from "../../utils";
+  import { settings } from "../Settings";
 
   let isMidClick = false;
 
@@ -44,10 +45,14 @@
       }
       $isExploding = false;
 
-      const message = levelEnded
+      let message = levelEnded
         ? `Game clear!\nYou received ${$game.currentScore} Coin(s)!`
         : "Oh no! You get 0 Coins!";
 
+      if (levelEnded && !$settings.hasBeatenLastLevel && $game.level === 7) {
+        $settings = { ...$settings, hasBeatenLastLevel: true };
+        message = `Game clear!\nNew setting unlocked`;
+      }
       dialogHandlerModal.showLevelDialog(message);
 
       // waits until the dialog is closed
@@ -59,11 +64,13 @@
 
       // Other squares update
       await delay(600);
+      $isChangingLevels = true;
+      $hasFinishedLevel = false;
 
       $game.updateLevel(levelEnded);
 
       await delay(200);
-      $hasFinishedLevel = false;
+      $isChangingLevels = false;
 
       $game = $game;
       $selectedId = { row: 0, col: 0 };
