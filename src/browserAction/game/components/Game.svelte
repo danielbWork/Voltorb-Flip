@@ -41,7 +41,7 @@
 
       if (!levelEnded) {
         $isExploding = true;
-        await delay(1000);
+        await delay(950);
       }
       $isExploding = false;
 
