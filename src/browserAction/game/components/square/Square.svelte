@@ -142,8 +142,9 @@
   }
 
   .flip-box-selected {
-    outline: 6px solid #683028;
+    outline: 8px solid #683028;
     z-index: 3;
+    outline-offset: -2px;
   }
 
   .flip-box-selected-memo {

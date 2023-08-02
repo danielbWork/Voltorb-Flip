@@ -15,17 +15,18 @@
 </script>
 
 <div class="grid-container" style="background-color: {color};">
-  <span class="sum-item">
+  <span class="sum-item" style="background-color: {color};">
     {#if sum < 10}0{/if}{sum}
   </span>
 
   <img
+    style="background-color: {color};"
     class="voltorb-image-item"
     alt="voltorb"
     src="/assets/icons/voltorb_48x48.png"
     draggable="false"
   />
-  <span class="voltorbs-item">
+  <span class="voltorbs-item" style="background-color: {color};">
     {voltorbCount}
   </span>
 </div>
