@@ -29,9 +29,6 @@
   {/await}
 </div>
 
-<!-- TODO Mention the following: Thefontsmagazine.com, https://www.1001fonts.com/,
-    www.pentacom.jp, pokemon, smogon.com, https://voltorbflip.brandon-stein.com/-->
-<!-- bulbapedia.bulbagarden.net/,https://www.pentacom.jp/pentacom/bitfontmaker2/, pokemon infinitefusions, icons8.com-->
 <style>
   div {
     height: 900px;
