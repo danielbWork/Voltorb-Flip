@@ -157,6 +157,7 @@
     border: 3px solid #282828;
     width: 75px;
     height: 75px;
+    outline: 4px solid #d0e8e0;
   }
 
   .flip-box-inner-selected {
