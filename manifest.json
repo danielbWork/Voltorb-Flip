@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Voltorb-Flip",
 	"description": "Allows you to play voltorb flip",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"icons": {
 		"48": "assets/icons/voltorb_48x48.png",
 		"96": "assets/icons/voltorb_96x96.png"

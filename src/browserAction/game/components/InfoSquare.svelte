@@ -39,7 +39,8 @@
     height: 81px;
     display: grid;
     row-gap: 15px;
-    outline: 6px solid #d0e8e0;
+    outline: 7px solid #d0e8e0;
+    outline-offset: -1px;
     border-radius: 1px;
     z-index: 2;
   }

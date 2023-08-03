@@ -69,10 +69,12 @@
           draggable="false"
         />
 
-        <SquareMemo
-          memos={square.memos}
-          displayPencil={$isMemoOpen && selected}
-        />
+        {#if !$isChangingLevels}
+          <SquareMemo
+            memos={square.memos}
+            displayPencil={$isMemoOpen && selected}
+          />
+        {/if}
       </div>
 
       <!-- svelte-ignore a11y-click-events-have-key-events -->
